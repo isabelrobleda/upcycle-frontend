@@ -9,13 +9,13 @@ import ElectronicsIcon from "../assets/electronics-icon.svg";
 import DecorIcon from "../assets/decor-icon.svg";
 
 function CardProduct() {
-  const [selectedProduct, setSelectedProduct] = useState("");
-  const handleProductSelect = (productName) => {
-    setSelectedProduct(productName);
+  const [product, setProduct] = useState("");
+  const handleProductSelect = (product) => {
+    setProduct(product);
   };
 
   const renderSubcategory = () => {
-    switch (selectedProduct) {
+    switch (product) {
       case "Camas":
         return (
           <>
@@ -80,8 +80,9 @@ function CardProduct() {
       <div className="grid md:grid-cols-4 md:mx-10">
         <div
           className={`flex flex-col rounded-md m-1 w-50 h-50 bg-orange-200 hover:bg-orange-300 focus:bg-orange-300 ${
-            selectedProduct === "Camas" ? "bg-orange-300" : ""
+            product === "Camas" ? "bg-orange-300" : ""
           }`}
+          value={product}
           onClick={() => handleProductSelect("Camas")}
         >
           <img className="h-60" src={BedIcon} alt="" />
@@ -91,8 +92,9 @@ function CardProduct() {
         </div>
         <div
           className={`flex flex-col rounded-md m-1 w-50 h-50 bg-orange-200 hover:bg-orange-300 focus:bg-orange-300 ${
-            selectedProduct === "Mesas" ? "bg-orange-300" : ""
+            product === "Mesas" ? "bg-orange-300" : ""
           }`}
+          value={product}
           onClick={() => handleProductSelect("Mesas")}
         >
           <img className="h-60" src={TableIcon} alt="" />
@@ -102,8 +104,9 @@ function CardProduct() {
         </div>
         <div
           className={`flex flex-col rounded-md m-1 w-50 h-50 bg-orange-200 hover:bg-orange-300 focus:bg-orange-300 ${
-            selectedProduct === "Sillones" ? "bg-orange-300" : ""
+            product === "Sillones" ? "bg-orange-300" : ""
           }`}
+          value={product}
           onClick={() => handleProductSelect("Sillones")}
         >
           <img className="h-60" src={SofaIcon} alt=""></img>
@@ -113,8 +116,9 @@ function CardProduct() {
         </div>
         <div
           className={`flex flex-col rounded-md m-1 w-50 h-50 bg-orange-200 hover:bg-orange-300 focus:bg-orange-300 ${
-            selectedProduct === "Sillas" ? "bg-orange-300" : ""
+            product === "Sillas" ? "bg-orange-300" : ""
           }`}
+          value={product}
           onClick={() => handleProductSelect("Sillas")}
         >
           <img className="h-60" src={ChairIcon} alt=""></img>
@@ -124,8 +128,9 @@ function CardProduct() {
         </div>
         <div
           className={`flex flex-col rounded-md m-1 w-50 h-50 bg-orange-200 hover:bg-orange-300 focus:bg-orange-300 ${
-            selectedProduct === "Iluminación" ? "bg-orange-300" : ""
+            product === "Iluminación" ? "bg-orange-300" : ""
           }`}
+          value={product}
           onClick={() => handleProductSelect("Iluminación")}
         >
           <img className="h-60" src={LampIcon} alt="" />
@@ -135,8 +140,9 @@ function CardProduct() {
         </div>
         <div
           className={`flex flex-col rounded-md m-1 w-50 h-50 bg-orange-200 hover:bg-orange-300 focus:bg-orange-300 ${
-            selectedProduct === "Gabinetes" ? "bg-orange-300" : ""
+            product === "Gabinetes" ? "bg-orange-300" : ""
           }`}
+          value={product}
           onClick={() => handleProductSelect("Gabinetes")}
         >
           <img className="h-60" src={StorageIcon} alt="" />
@@ -146,8 +152,9 @@ function CardProduct() {
         </div>
         <div
           className={`flex flex-col rounded-md m-1 w-50 h-50 bg-orange-200 hover:bg-orange-300 focus:bg-orange-300 ${
-            selectedProduct === "Electrónicos" ? "bg-orange-300" : ""
+            product === "Electrónicos" ? "bg-orange-300" : ""
           }`}
+          value={product}
           onClick={() => handleProductSelect("Electrónicos")}
         >
           <img className="h-60" src={ElectronicsIcon} alt="" />
@@ -157,8 +164,9 @@ function CardProduct() {
         </div>
         <div
           className={`flex flex-col rounded-md m-1 w-50 h-50 bg-orange-200 hover:bg-orange-300 focus:bg-orange-300 ${
-            selectedProduct === "Decoración" ? "bg-orange-300" : ""
+            product === "Decoración" ? "bg-orange-300" : ""
           }`}
+          value={product}
           onClick={() => handleProductSelect("Decoración")}
         >
           <img className="h-60" src={DecorIcon} alt="" />
@@ -167,7 +175,7 @@ function CardProduct() {
           </div>
         </div>
         <div className="mt-4 flex justify-center items-center">
-        {selectedProduct && renderSubcategory()}
+        {product && renderSubcategory()}
       </div>
       </div>
       <br />

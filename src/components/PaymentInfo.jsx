@@ -1,12 +1,28 @@
 import React from "react";
 import { useState } from "react";
 
-function PaymentInfo() {
+function PaymentInfo({ onDeliveryAdoptionChange, onBankDetailsChange, onNameChange }) {
   const [selectedOption, setSelectedOption] = useState("");
+  const [deliveryAdoption, setDeliveryAdoption] = useState("");
+  const [bankDetails, setBankDetails] = useState("");
+  const [name, setName] = useState("");
+  
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+    onDeliveryAdoptionChange(option);
   };
+
+
+  const handleBankDetailsChange = (e) => {
+    setBankDetails(e.target.value);
+    onBankDetailsChange(e.target.value);
+  }
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+    onNameChange(e.target.value);
+  }
 
   return (
     <div>
@@ -31,6 +47,8 @@ function PaymentInfo() {
                       selectedOption === "100%" ? "border-orange-300" : ""
                     }`}
                     onClick={() => handleOptionSelect("100%")}
+                    value={selectedOption}
+                    onChange={handleOptionSelect}
                   >
                     <div className="">
                       <h4 className="text-gray-700 p-2" htmlFor="DeliveryAdoption">100%</h4>
@@ -41,6 +59,8 @@ function PaymentInfo() {
                       selectedOption === "50%" ? "border-orange-300" : ""
                     }`}
                     onClick={() => handleOptionSelect("50%")}
+                    value={selectedOption}
+                    onChange={handleOptionSelect}
                   >
                     <div className="">
                       <h4 className="text-gray-700 p-2" htmlFor="DeliveryAdoption">50%</h4>
@@ -51,6 +71,8 @@ function PaymentInfo() {
                       selectedOption === "0%" ? "border-orange-300" : ""
                     }`}
                     onClick={() => handleOptionSelect("0%")}
+                    value={selectedOption}
+                    onChange={handleOptionSelect}
                   >
                     <div className="">
                       <h4 className="text-gray-700 p-2" htmlFor="DeliveryAdoption">0%</h4>
@@ -69,10 +91,12 @@ function PaymentInfo() {
             </label>
             <div className="mt-2">
               <input
-                type="text"
+                type="number"
                 name="bank-details"
                 id="bank-details"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
+                value={bankDetails}
+                onChange={handleBankDetailsChange}
               />
             </div>
           </div>
@@ -89,9 +113,10 @@ function PaymentInfo() {
                 type="text"
                 name="signature"
                 id="signature"
-                autoComplete="postal-code"
                 placeholder="Firma/Nombre"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
+                value={name}
+                onChange={handleNameChange}
               />
             </div>
           </div>

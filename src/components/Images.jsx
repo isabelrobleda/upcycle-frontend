@@ -1,13 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
 
 function Images() {
-  const [images, setImages] = useState([]);
+  const [UploadImages, setUploadImages] = useState([]);
 
   const handleImageChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
-    setImages(selectedFiles);
+    setUploadImages(selectedFiles);
   };
 
   const handleInstructions = (e) => {
@@ -43,8 +42,8 @@ function Images() {
                 accept="image/*"
                 multiple
                 onChange={handleImageChange}
-                id="images"
-                name="images"
+                id="files"
+                name="UploadImages"
                 className="border ml-2 mt-3"
               />
               <br />

@@ -1,12 +1,20 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
-function Description() {
+function Description({ onDescriptionChange, onStateOfProductChange }) {
   const [selectedOption, setSelectedOption] = useState("");
+  const [description, setDescription] = useState("");
+  const [stateOfProduct, setStateOfProduct] = useState("");
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+    onStateOfProductChange(option);
   };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+    onDescriptionChange(e.target.value);
+  };
+
   return (
     <div>
       <h1 className="font-bold text-xl text-gray-700 text-left mb-1 mt-2">
@@ -19,6 +27,8 @@ function Description() {
           cols="30"
           rows="5"
           className="border p-2 rounded-md"
+          value={description}
+          onChange={handleDescriptionChange}
         ></textarea>
       </div>
       <div className="col-span-full">
