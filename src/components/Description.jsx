@@ -16,10 +16,8 @@ function Description({ onDescriptionChange, onStateOfProductChange }) {
   };
 
   return (
-    <div>
-      <h1 className="font-bold text-xl text-gray-700 text-left mb-1 mt-2">
-        Descripción del producto
-      </h1>
+    <div className="md:mx-36 ">
+      <h2 className="font-bold text-xl text-gray-700 text-left ">Descripción</h2>
       <div className="flex flex-col">
         <textarea
           name="Description"
@@ -29,6 +27,7 @@ function Description({ onDescriptionChange, onStateOfProductChange }) {
           className="border p-2 rounded-md"
           value={description}
           onChange={handleDescriptionChange}
+          required={true}
         ></textarea>
       </div>
       <div className="col-span-full">

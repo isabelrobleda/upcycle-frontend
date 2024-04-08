@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+@font-face {
+  font-family: "Roxborough CF";
+  src: url("./assets/Roxborough\ CF.ttf");
+}
+
+body {
+  font-family: "Roxborough CF";
+}
