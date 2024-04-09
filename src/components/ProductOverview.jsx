@@ -157,9 +157,9 @@ function ProductOverview({
   
       // Adjust the approximate selling price based on weight selection
       if (weight === "<12kg") {
-        approxPrice += 330; // Add 330 for weight <12kg
+        approxPrice += 383; // Add 330 for weight <12kg
       } else if (weight === ">12kg") {
-        approxPrice += 1000; // Add 1000 for weight >12kg
+        approxPrice += 1218; // Add 1000 for weight >12kg
       }
   
       setApproxSellingPrice(approxPrice.toFixed(2));
@@ -334,48 +334,6 @@ function ProductOverview({
           </select>
         </div>
       </div>
-      <div className="border my-8 py-7 px-7 rounded-md border-dotted">
-        <h3 className="text-lg font-bold text-gray-700 text-left">Precio aproximado de venta</h3>
-        <p className="text-gray-700 text-left text-sm pb-5">El precio mínimo de venta es de $1500MXN. El porcentaje para el vendedor es del 70% (menos envío y comisiones bancarias)</p>
-        <div className="flex flex-row items-center text-sm justify-start text-gray-700 ">
-          <label htmlFor="priceInput" className="pr-2">
-            Precio cuando obtuve en producto (en MXN):
-          </label>
-          <input
-            type="text"
-            id="priceInput"
-            value={priceInput}
-            onChange={handlePriceInputChange}
-            placeholder={weight === "<12kg" ? "2500" : "3000"}
-            className="border-2 border-gray-300 rounded-md p-1 w-1/4 text-sm"
-            required
-          />
-        </div>
-        <div className="flex flex-row items-center text-sm justify-start pt-3">
-          <label htmlFor="desiredSellingPrice" className="pr-2">
-            Precio deseado de venta (en MXN):
-          </label>
-          <input
-            type="text"
-            id="desiredSellingPrice"
-            value={desiredSellingPrice}
-            onChange={handleDesiredSellingPriceChange}
-            placeholder={weight === "<12kg" ? "1500 " : "2500"}
-            className="border-2 border-gray-300 rounded-md p-1 w-1/4 text-sm"
-            required
-          />
-        </div>
-        <div className="flex flex-row items-center text-sm justify-start pt-3">
-          <label className="pr-2">Precio aproximado de venta: </label>
-          <input
-            type="text"
-            value={approxSellingPrice}
-            readOnly
-            className="border-2 border-gray-300 rounded-md p-1 w-1/4 text-sm"
-          />
-        </div>
-        
-      </div>
       <div className="sm:col-span-3">
         <label
           htmlFor="material"
@@ -425,6 +383,68 @@ function ProductOverview({
           onChange={handleMaterialMoreInfoChange}
         />
       </div>
+      <div className="border my-8 py-7 px-7 rounded-md border-dotted">
+        <h3 className="text-lg font-bold text-gray-700 text-left">Precio aproximado de venta</h3>
+        <p className="text-gray-700 text-left text-sm pb-5">El precio mínimo de venta al público (sin considerar el costo de envío) es de MXN$1500 para accesorios de menos de 12 Kg (que puedas cargar solo) y MXN$3500 para muebles de más de 12Kg (que necesiten 2 o más personas para moverse).</p>
+        <div className="flex flex-row items-center text-sm justify-start text-gray-700 ">
+          <label htmlFor="priceInput" className="pr-2">
+          Precio del producto si fuera nuevo hoy (en MXN)*:
+          </label>
+          <input
+            type="text"
+            id="priceInput"
+            value={priceInput}
+            onChange={handlePriceInputChange}
+            placeholder={weight === "<12kg" ? "2500" : "3000"}
+            className="border-2 border-gray-300 rounded-md p-1 w-1/4 text-sm"
+            required
+          />
+        </div>
+        
+        <div className="flex flex-row items-center text-sm justify-start pt-3">
+          <label className="pr-2">Precio máximo de venta (en MXN) **: </label>
+          <input
+            type="text"
+            value={approxSellingPrice}
+            readOnly
+            className="border-2 border-dotted border-gray-300 rounded-md p-1 w-1/4 text-sm"
+          />
+        </div>
+        <div className="flex flex-row items-center text-sm justify-start pt-3">
+          <label htmlFor="desiredSellingPrice" className="pr-2">
+          Precio en el que tú deseas vender tu producto (en MXN) ***:
+          </label>
+          <input
+            type="text"
+            id="desiredSellingPrice"
+            value={desiredSellingPrice}
+            onChange={handleDesiredSellingPriceChange}
+            placeholder={weight === "<12kg" ? "1500 " : "2500"}
+            className="border-2 border-gray-300 rounded-md p-1 w-1/4 text-sm"
+            required
+          />
+        </div>
+        <div className="flex flex-row items-center text-sm justify-start pt-3">
+            <input type="radio" name="agreement-price" id="agreement-price" />
+            <label htmlFor="agreement-price" className="pl-2">Estoy de acuerdo con la propuesta de Upcycle</label>
+        </div>
+        <div className="flex flex-row items-center text-sm justify-start pt-3">
+            <input type="radio" name="agreement-price" id="no-agreement-price" />
+            <label htmlFor="no-agreement-price" className="px-2">No estoy de acuerdo</label>
+            <input type="text" id="proposal-price" placeholder="Introduce cifra distinta" className="border-2 border-gray-300 rounded-md p-1 w-1/4 text-sm" />
+        </div>
+        <div className="flex flex-row text-left pt-3">
+          <p className="text-gray-700 text-xs pt-3">* ¿Cuánto cuesta tu producto o uno muy similar hoy en la tienda donde lo compraste o una muy similar?</p>
+        </div>
+        <div className="flex flex-row text-left pt-1">
+          <p className="text-gray-700 text-xs">** Éste es el precio máximo en podrás vender tu producto tomando en cuenta algunas de las características que nos proporcionaste. OJO: no hay mínimo, puedes bajarlo tanto cuanto quieras para hacer la venta más atractiva.</p>
+        </div>
+        <div className="flex flex-row text-left pt-1">
+          <p className="text-gray-700 text-xs">*** El máximo es el establecido en la casilla anterior pero siéntete libre de reducirlo. Te sugerimos ofrecer tu producto a un precio competitivo y relacionado con los años de uso y su estado para incentivar su venta con mayor rapidez. Al precio que elijas, se añadirá el costo de envío estándar. Como vendedor, recibirás aprox. el 70% de este precio.</p>
+        </div>
+        
+      </div>
+      
     </div>
   );
 }

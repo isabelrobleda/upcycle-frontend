@@ -87,8 +87,7 @@ function VendorInfo({
         Información de Pickup
       </h2>
       <p className="mt-1 text-sm leading-6 text-gray-700 text-left">
-        Dannos tu dirección lo más exacta posible para que el servicio de
-        mensajería.
+      Danos todos los detalles sobre el lugar de recolección para el equipo de logística. Esta información es vital para saber que está cubierto por el servicio de envío estandar y no habrá costos adicionales para el vendedor.
       </p>
 
       <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">

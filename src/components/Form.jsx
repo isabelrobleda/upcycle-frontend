@@ -54,9 +54,12 @@ function Form() {
       floors: "",
     },
     PaymentInformation: {
-      deliveryAdoption: "",
       bankDetails: "",
       name: "",
+      nameOfHolder: "",
+      nameOfBank: "",
+      accountNumber: "",
+      phone: "",
     },
   });
 
@@ -227,6 +230,13 @@ function Form() {
     });
     setPaymentInfoCompleted(true);
   };
+
+  const handlePhoneChange = (phone) => {
+    setFormData({
+      ...formData,
+      PaymentInformation: { ...formData.PaymentInformation, phone },
+    });
+  }
 
   const handleCityChange = (city) => {
     setFormData({
@@ -543,6 +553,7 @@ function Form() {
               onNameHolderChange={handleNameOfHolderChange}
               onNameBankChange={handleNameOfBankChange}
               onAccountNumberChange={handleAccountNumberChange}
+              onPhoneChange={handlePhoneChange}
             />
           )}
         </div>

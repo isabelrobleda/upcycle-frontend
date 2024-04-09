@@ -11,6 +11,7 @@ import GardenIcon from "../assets/garden-icon.png";
 import PingPongIcon from "../assets/pingpong-icon.png";
 import CribIcon from "../assets/crib-icon.png";
 import WashingMachine from "../assets/washing-machine.png";
+import Desk from "../assets/desk-icon.png";
 
 function CardProduct({ onProductChange }) {
   const [product, setProduct] = useState("");
@@ -966,7 +967,10 @@ function CardProduct({ onProductChange }) {
           value={category}
           onClick={() => handleCategorySelect("Oficina")}
         >
-          <img className="h-40" src={LampIcon} alt="" />
+          <div className="flex flex-col justify-center items-center">
+          <img className="h-40 w-42" src={Desk} alt="" />
+          </div>
+          
           <div className="">
             <h4 className="text-white pb-5">Oficina</h4>
           </div>
@@ -1048,7 +1052,8 @@ function CardProduct({ onProductChange }) {
           </div>
         </div>
       </div>
-      <div className="grid md:grid-cols-4 mt-10 md:mx-36">
+      
+      <div className="grid md:grid-flow-col md:mx-36 justify-center mt-3">
         {category && renderSubcategory()}
       </div>
       <br />
