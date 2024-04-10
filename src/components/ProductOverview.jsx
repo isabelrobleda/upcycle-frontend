@@ -124,7 +124,7 @@ function ProductOverview({
     const inputValue = e.target.value;
     // Validate input if weight is "<12kg"
     if (weight === "<12kg") {
-      if (/^\d+$/.test(inputValue) && parseInt(inputValue) <= 3000) {
+      if (/^\d+$/.test(inputValue) && parseInt(inputValue) <= 3500) {
         setPriceInput(inputValue);
       }
     } else {
@@ -140,13 +140,13 @@ function ProductOverview({
 
   const calculateApproxSellingPrice = () => {
     // Check if both price input and desired selling price are provided
-    if (priceInput && desiredSellingPrice) {
+    if (priceInput) {
       // Default discount percentage
-      let discountPercentage = 0.5;
+      let discountPercentage = 0.7;
   
       // Change discount percentage if urgency is "Discount"
       if (urgency === "discount") {
-        discountPercentage = 0.65;
+        discountPercentage = 0.6;
       }
   
       const newPrice = parseFloat(priceInput);
@@ -155,12 +155,12 @@ function ProductOverview({
       // Calculate approximate selling price based on discount percentage
       let approxPrice = newPrice * discountPercentage;
   
-      // Adjust the approximate selling price based on weight selection
-      if (weight === "<12kg") {
-        approxPrice += 383; // Add 330 for weight <12kg
-      } else if (weight === ">12kg") {
-        approxPrice += 1218; // Add 1000 for weight >12kg
-      }
+      // // Adjust the approximate selling price based on weight selection
+      // if (weight === "<12kg") {
+      //   approxPrice += 383; // Add 330 for weight <12kg
+      // } else if (weight === ">12kg") {
+      //   approxPrice += 1218; // Add 1000 for weight >12kg
+      // }
   
       setApproxSellingPrice(approxPrice.toFixed(2));
     } else {
@@ -177,7 +177,7 @@ function ProductOverview({
   return (
     <div className="md:mx-36 mt-16">
       <h2 className="font-bold text-xl text-gray-700 text-left mt-8">
-        Sobre el Producto
+        3. Sobre el Producto
       </h2>
 
       <div className="sm:col-span-3">
@@ -327,7 +327,7 @@ function ProductOverview({
             <option value="" disabled hidden>
               Selecciona
             </option>
-            <option value="<12kg">Más de 12kg - Lo puedo cargar solo.</option>
+            <option value="<12kg">Menos de 12kg - Lo puedo cargar solo.</option>
             <option value=">12kg">
               Más de 12kg - Necesito que alguien me ayude a cargarlo
             </option>
@@ -385,7 +385,8 @@ function ProductOverview({
       </div>
       <div className="border my-8 py-7 px-7 rounded-md border-dotted">
         <h3 className="text-lg font-bold text-gray-700 text-left">Precio aproximado de venta</h3>
-        <p className="text-gray-700 text-left text-sm pb-5">El precio mínimo de venta al público (sin considerar el costo de envío) es de MXN$1500 para accesorios de menos de 12 Kg (que puedas cargar solo) y MXN$3500 para muebles de más de 12Kg (que necesiten 2 o más personas para moverse).</p>
+        <p className="text-gray-700 text-left text-sm pb-1">El precio mínimo de venta al público (sin considerar el costo de envío) es de MXN$1300 para accesorios de menos de 12 Kg (que puedas cargar solo) y MXN$3500 para muebles de más de 12Kg (que necesiten 2 o más personas para moverse).</p>
+        <p className="text-gray-700 text-left text-sm pb-5 font-semibold">Si vas a donar el producto, puedes saltar hasta "Subir tus archivos"</p>
         <div className="flex flex-row items-center text-sm justify-start text-gray-700 ">
           <label htmlFor="priceInput" className="pr-2">
           Precio del producto si fuera nuevo hoy (en MXN)*:
@@ -395,33 +396,19 @@ function ProductOverview({
             id="priceInput"
             value={priceInput}
             onChange={handlePriceInputChange}
-            placeholder={weight === "<12kg" ? "2500" : "3000"}
+            placeholder={weight === "<12kg" ? "1858" : "3500"}
             className="border-2 border-gray-300 rounded-md p-1 w-1/4 text-sm"
-            required
+            min={weight === "<12kg" ? "1858" : "3500"}
           />
         </div>
         
         <div className="flex flex-row items-center text-sm justify-start pt-3">
-          <label className="pr-2">Precio máximo de venta (en MXN) **: </label>
+          <label className="pr-2">Precio que te sugerimos de venta (en MXN) **: </label>
           <input
             type="text"
             value={approxSellingPrice}
             readOnly
             className="border-2 border-dotted border-gray-300 rounded-md p-1 w-1/4 text-sm"
-          />
-        </div>
-        <div className="flex flex-row items-center text-sm justify-start pt-3">
-          <label htmlFor="desiredSellingPrice" className="pr-2">
-          Precio en el que tú deseas vender tu producto (en MXN) ***:
-          </label>
-          <input
-            type="text"
-            id="desiredSellingPrice"
-            value={desiredSellingPrice}
-            onChange={handleDesiredSellingPriceChange}
-            placeholder={weight === "<12kg" ? "1500 " : "2500"}
-            className="border-2 border-gray-300 rounded-md p-1 w-1/4 text-sm"
-            required
           />
         </div>
         <div className="flex flex-row items-center text-sm justify-start pt-3">
@@ -433,6 +420,20 @@ function ProductOverview({
             <label htmlFor="no-agreement-price" className="px-2">No estoy de acuerdo</label>
             <input type="text" id="proposal-price" placeholder="Introduce cifra distinta" className="border-2 border-gray-300 rounded-md p-1 w-1/4 text-sm" />
         </div>
+        <div className="flex flex-row items-center text-sm  text-left justify-start pt-3">
+          <label htmlFor="desiredSellingPrice" className="pr-2">
+          Precio en el que tú deseas vender tu producto (en MXN). Al precio que elijas, se añadirá el costo de envío estándar. Como vendedor, recibirás aprox. el 70% de este precio.:
+          </label>
+          <input
+            type="text"
+            id="desiredSellingPrice"
+            value={desiredSellingPrice}
+            onChange={handleDesiredSellingPriceChange}
+            placeholder={weight === "<12kg" ? "1300 " : "3500"}
+            className="border-2 border-gray-300 rounded-md p-1 w-1/4 text-sm"
+          />
+        </div>
+        
         <div className="flex flex-row text-left pt-3">
           <p className="text-gray-700 text-xs pt-3">* ¿Cuánto cuesta tu producto o uno muy similar hoy en la tienda donde lo compraste o una muy similar?</p>
         </div>
@@ -440,7 +441,7 @@ function ProductOverview({
           <p className="text-gray-700 text-xs">** Éste es el precio máximo en podrás vender tu producto tomando en cuenta algunas de las características que nos proporcionaste. OJO: no hay mínimo, puedes bajarlo tanto cuanto quieras para hacer la venta más atractiva.</p>
         </div>
         <div className="flex flex-row text-left pt-1">
-          <p className="text-gray-700 text-xs">*** El máximo es el establecido en la casilla anterior pero siéntete libre de reducirlo. Te sugerimos ofrecer tu producto a un precio competitivo y relacionado con los años de uso y su estado para incentivar su venta con mayor rapidez. Al precio que elijas, se añadirá el costo de envío estándar. Como vendedor, recibirás aprox. el 70% de este precio.</p>
+          <p className="text-gray-700 text-xs">*** El máximo es el establecido en la casilla anterior pero siéntete libre de reducirlo. Te sugerimos ofrecer tu producto a un precio competitivo y relacionado con los años de uso y su estado para incentivar su venta con mayor rapidez. </p>
         </div>
         
       </div>

@@ -50,7 +50,7 @@ function Images() {
   return (
     <div className="md:mx-36 mt-16">
       <h2 className="font-bold text-xl text-gray-700 text-left mt-6">
-        Sube tus archivos
+        4. Sube tus archivos
       </h2>
       <p className="text-sm text-left text-gray-700 py-1">Añade al menos 4 fotos de su artículo desde varios ángulos. Los anuncios con mejores fotos se venden más rápido.</p>
       <p className="text-sm text-left text-gray-700 py-1">Si quieres vender línea blanca o electrónicos, sube un video de max. 10 segundos y 20MB para asegurarnos que funciona.</p>

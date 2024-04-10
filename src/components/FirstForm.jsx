@@ -13,7 +13,6 @@ function FirstForm( {onUrgencyChange} ) {
   const [discount, setDiscount] = useState(false);
 
 
-
   const handleNextQuestionNo = (e) => {
     setNextQuestionNo(true);
     setNextQuestionYes(false);
@@ -29,10 +28,12 @@ function FirstForm( {onUrgencyChange} ) {
   };
 
   const handleDonation = (e) => {
+    e.preventDefault();
     setDonation(true);
+    console.log("donation", donation);
     setDiscount(false);
-    setUrgency(e.target.value);
-    onUrgencyChange(e.target.value);
+    setUrgency("donate"); 
+    onUrgencyChange("donate"); 
   };
 
   const handleDiscount = (e) => {
@@ -125,7 +126,8 @@ function FirstForm( {onUrgencyChange} ) {
                     htmlFor="no"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    Lo quiero donar
+                    <b>Lo quiero donar</b> (nosotros nos encargamos de quitarlo de tus manos en <b>máximo 3 días hábiles</b> de manera gratuita. 
+)
                   </label>
                 </div>
 
@@ -142,7 +144,7 @@ function FirstForm( {onUrgencyChange} ) {
                     htmlFor="no"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    Quiero venderlo con descuento especial
+                    <b>Quiero venderlo con descuento especial</b> (intentaremos venderlo con un <b>descuento del 60% </b> o más contra su precio si fuera nuevo en nuestra sección de Last Chance)
                   </label>
                 </div>
               </div>

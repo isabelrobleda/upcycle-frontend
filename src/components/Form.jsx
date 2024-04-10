@@ -78,6 +78,7 @@ function Form() {
   };
 
   const [paymentInfoCompleted, setPaymentInfoCompleted] = useState(false);
+  const isButtonEnabled = paymentInfoCompleted || urgency === "donate";
 
   const handleUrgencyChange = (urgency) => {
     setUrgency(urgency);
@@ -207,21 +208,21 @@ function Form() {
       ...formData,
       PaymentInformation: { ...formData.PaymentInformation, nameOfBank },
     });
-  }
+  };
 
   const handleAccountNumberChange = (accountNumber) => {
     setFormData({
       ...formData,
       PaymentInformation: { ...formData.PaymentInformation, accountNumber },
     });
-  }
+  };
 
   const handleNameOfHolderChange = (nameOfHolder) => {
     setFormData({
       ...formData,
       PaymentInformation: { ...formData.PaymentInformation, nameOfHolder },
     });
-  }
+  };
 
   const handleNameChange = (name) => {
     setFormData({
@@ -236,7 +237,7 @@ function Form() {
       ...formData,
       PaymentInformation: { ...formData.PaymentInformation, phone },
     });
-  }
+  };
 
   const handleCityChange = (city) => {
     setFormData({
@@ -485,7 +486,7 @@ function Form() {
             Comencémos con la venta de tus muebles
           </h1>
           <p className="text-sm pt-2 ">
-            Por favor, llena la siguiente información, no te tomará más de 5 min
+            Por favor, llena la siguiente información, no te tomará más de 5 min solo son siete pasos
           </p>
         </div>
 
@@ -545,7 +546,7 @@ function Form() {
           )}
         </div>
         <div>
-          {sectionStatus.PaymentInfo && urgency !== "donate" &&  (
+          {sectionStatus.PaymentInfo && (
             <PaymentInfo
               onDeliveryAdoptionChange={handleDeliveryAdoptionChange}
               onBankDetailsChange={handleBankDetailsChange}
@@ -554,12 +555,14 @@ function Form() {
               onNameBankChange={handleNameOfBankChange}
               onAccountNumberChange={handleAccountNumberChange}
               onPhoneChange={handlePhoneChange}
+              urgency={urgency}
             />
           )}
         </div>
+
         <br />
         <div>
-          {paymentInfoCompleted && (
+          {isButtonEnabled && (
             <button
               type="submit"
               className=" my-4 border border-slate-400 text-slate-400 py-2 px-10 rounded-md text-sm hover:border-orange-400 hover:text-white hover:bg-orange-400"

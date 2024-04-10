@@ -84,7 +84,7 @@ function VendorInfo({
   return (
     <div className="md:mx-36 mt-16">
       <h2 className="font-bold text-xl text-gray-700 text-left mt-6">
-        Información de Pickup
+        5. Información de Pickup
       </h2>
       <p className="mt-1 text-sm leading-6 text-gray-700 text-left">
       Danos todos los detalles sobre el lugar de recolección para el equipo de logística. Esta información es vital para saber que está cubierto por el servicio de envío estandar y no habrá costos adicionales para el vendedor.
@@ -199,7 +199,7 @@ function VendorInfo({
             htmlFor="link-maps"
             className="block text-sm font-medium leading-6 text-gray-700 text-left"
           >
-            Link de Google Maps
+            Link de Google Maps (opcional)
           </label>
           <input
             type="text"

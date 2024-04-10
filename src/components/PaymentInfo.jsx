@@ -8,6 +8,7 @@ function PaymentInfo({
   onNameBankChange,
   onAccountNumberChange,
   onPhoneChange,
+  urgency,
 }) {
   const [bankDetails, setBankDetails] = useState("");
   const [name, setName] = useState("");
@@ -49,8 +50,9 @@ function PaymentInfo({
   return (
     <div className="md:mx-36 mt-16">
       <h2 className="font-bold text-xl text-gray-700 text-left">
-        Datos bancarios para recibir tu pago
+        6. Datos bancarios para recibir tu pago
       </h2>
+      <p className="text-orange-800 font-semibold text-left text-sm">Si tu producto es para donación, ve al paso 7</p>
       <div>
         <div className="space-y-10">
           <div className="">
@@ -72,7 +74,7 @@ function PaymentInfo({
                 value={nameOfHolder}
                 onChange={handleNameOfHolderChange}
                 placeholder="Juan Pérez"
-                required={true}
+                required={urgency !== "donate"}
               />
             </div>
             <label
@@ -90,9 +92,9 @@ function PaymentInfo({
                 value={bankDetails}
                 onChange={handleBankDetailsChange}
                 placeholder="123456789012345678"
-                required={true}
                 maxLength={18}
                 minLength={18}
+                required={urgency !== "donate"}
               />
             </div>
             <label
@@ -131,9 +133,9 @@ function PaymentInfo({
             </div>
 
             <div className="sm:col-span-2">
-              <h2 className="font-bold text-lg text-gray-700 text-left mt-8 mb-2">
-                Datos de contacto para agendar el pickup de tu mueble y aclarar
-                dudas sobre tu producto.
+              <h2 className="font-bold text-xl text-gray-700 text-left mt-16 mb-2">
+                7. Datos de contacto para agendar el pickup de tu mueble y aclarar
+                dudas.
               </h2>
               <label
                 htmlFor="phone"
