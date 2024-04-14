@@ -54,7 +54,7 @@ function FirstForm({ onUrgencyChange, onFoundationToDonate }) {
     <div className="flex flex-col items-center">
       <form
         action=""
-        className="flex flex-col items-start border rounded-md p-10 w-max shadow-md bg-white"
+        className="flex flex-col items-start border rounded-md p-10 shadow-md bg-white"
       >
         <div>
           <label
@@ -76,7 +76,7 @@ function FirstForm({ onUrgencyChange, onFoundationToDonate }) {
           <div className="flex items-center gap-x-3">
             <button
               onClick={handleNextQuestionNo}
-              className="border border-gray-300 px-4 py-2 rounded-md bg-white hover:bg-gray-100 focus:bg-gray-200 text-sm mt-2"
+              className="border border-gray-300 px-4 py-2 rounded-md bg-white hover:bg-gray-100 focus:bg-gray-200 text-sm mt-2 text-left"
             >
               No, puedo esperar a que se venda a mejor precio
             </button>
@@ -96,8 +96,8 @@ function FirstForm({ onUrgencyChange, onFoundationToDonate }) {
         <div>
           {nextQuestionYes && (
             <>
-              <div className="flex flex-col items-start ">
-                <div className="flex items-center gap-x-3">
+              
+                <div className="w-full mt-4">
                   <button
                     onClick={handleDonation}
                     className="border border-gray-300 px-4 py-2 rounded-md bg-white hover:bg-gray-100 focus:bg-gray-200 mt-8 text-sm"
@@ -107,17 +107,17 @@ function FirstForm({ onUrgencyChange, onFoundationToDonate }) {
                     gratuita)
                   </button>
                 </div>
-                <div className="flex items-center gap-x-3">
-                  <button
+                <div className="flex flex-col items-center gap-x-3">
+                  <div
                     onClick={handleDiscount}
-                    className="border border-gray-300 px-4 py-2 rounded-md bg-white hover:bg-gray-100 focus:bg-gray-200 mt-2 text-sm"
+                    className="border border-gray-300 px-4 py-2 rounded-md bg-white hover:bg-gray-100 focus:bg-gray-200 mt-2 text-sm "
                   >
                     <b>Quiero venderlo con descuento especial</b> (intentaremos
                     venderlo con un <b>descuento del 60% </b> o más contra su
                     precio si fuera nuevo en nuestra sección de Last Chance)
-                  </button>
+                  </div>
                 </div>
-              </div>
+             
             </>
           )}
         </div>

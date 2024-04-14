@@ -382,7 +382,7 @@ function ProductOverview({
           id="material-more-info"
           name="material-more-info"
           placeholder="Caoba, Pino, Aluminio"
-          className="block w-1/4 pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
+          className="block md:w-1/4 pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
           value={materialMoreInfo}
           onChange={handleMaterialMoreInfoChange}
         />
@@ -422,7 +422,7 @@ function ProductOverview({
         <div className="flex flex-row items-center text-sm justify-start pt-3">
             <input type="radio" name="agreement-price" id="no-agreement-price" />
             <label htmlFor="no-agreement-price" className="px-2">No estoy de acuerdo</label>
-            <input type="text" id="proposal-price" placeholder="Introduce cifra distinta" className="border-2 border-gray-300 rounded-md p-1 w-1/4 text-sm" />
+            <input type="text" id="proposal-price" placeholder="Introduce cifra distinta" className="border-2 border-gray-300 rounded-md p-1 md:w-1/4 text-sm" />
         </div>
         <div className="flex flex-row items-center text-sm  text-left justify-start pt-3">
           <label htmlFor="desiredSellingPrice" className="pr-2">
@@ -434,7 +434,7 @@ function ProductOverview({
             value={desiredSellingPrice}
             onChange={handleDesiredSellingPriceChange}
             placeholder={weight === "<12kg" ? "1300 " : "3500"}
-            className="border-2 border-gray-300 rounded-md p-1 w-1/4 text-sm"
+            className="border-2 border-gray-300 rounded-md p-1  md:w-1/4 text-sm"
           />
         </div>
         
