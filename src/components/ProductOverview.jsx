@@ -14,6 +14,8 @@ function ProductOverview({
   onWeightChange,
   onMaterialMoreInfoChange,
   onPriceInputChange,
+  onDesiredSellingPriceChange,
+  onApproxSellingPrice,
   urgency,
 }) {
   const [selected, setSelected] = useState([""]);
@@ -136,6 +138,7 @@ function ProductOverview({
 
   const handleDesiredSellingPriceChange = (e) => {
     setDesiredSellingPrice(e.target.value);
+    onDesiredSellingPriceChange(e.target.value);
   };
 
   const calculateApproxSellingPrice = () => {
@@ -163,6 +166,7 @@ function ProductOverview({
       // }
   
       setApproxSellingPrice(approxPrice.toFixed(2));
+      onApproxSellingPrice(approxPrice.toFixed(2))
     } else {
       // Reset the approximate selling price if either of the inputs is missing
       setApproxSellingPrice("");

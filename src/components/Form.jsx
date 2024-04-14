@@ -27,7 +27,10 @@ function Form() {
   });
 
   const [formData, setFormData] = useState({
-    Urgency: "",
+    FirstForm: {
+      Urgency: "",
+      FoundationToDonate: "",
+    },
     ProductInformation: {
       product: "",
       description: "",
@@ -67,6 +70,8 @@ function Form() {
 
   const [urgency, setUrgency] = useState("");
 
+  const [foundationToDonate, setFoundationToDonate] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -80,9 +85,14 @@ function Form() {
   const [paymentInfoCompleted, setPaymentInfoCompleted] = useState(false);
   const isButtonEnabled = paymentInfoCompleted || urgency === "donate";
 
+  const [previewModalIsOpen, setPreviewModalIsOpen] = useState(false);
+
   const handleUrgencyChange = (urgency) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      FirstForm: { ...prevFormData.FirstForm, Urgency: urgency },
+    }));
     setUrgency(urgency);
-    setFormData({ ...formData, Urgency: urgency });
     setSectionStatus({
       ...sectionStatus,
       ProductDetails: true,
@@ -92,6 +102,14 @@ function Form() {
 
   const handleFirstModalChange = () => {
     setFirstModalIsOpen(false);
+  };
+
+  const handleFoundationToDonateChange = (foundation) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      FirstForm: { ...prevFormData.FirstForm, FoundationToDonate: foundation },
+    }));
+    setFoundationToDonate(foundation);
   };
 
   const handleProductChange = (product) => {
@@ -178,6 +196,26 @@ function Form() {
     setFormData({
       ...formData,
       ProductInformation: { ...formData.ProductInformation, priceInput },
+    });
+  };
+
+  const handleDesiredSellingPriceChange = (desiredSellingPrice) => {
+    setFormData({
+      ...formData,
+      ProductInformation: {
+        ...formData.ProductInformation,
+        desiredSellingPrice,
+      },
+    });
+  };
+
+  const handleApproxSellingPriceChange = (approxSellingPrice) => {
+    setFormData({
+      ...formData,
+      ProductInformation: {
+        ...formData.ProductInformation,
+        approxSellingPrice,
+      },
     });
   };
 
@@ -335,8 +373,11 @@ function Form() {
   const upload = async (formData, files) => {
     const formDataToSend = new FormData();
 
-    // Append urgency field
-    formDataToSend.append("Urgency", formData.Urgency);
+    console.log(JSON.stringify(formDataToSend, null, 2));
+    // Append urgency and foundation to donate fields
+    for (const key in formData.FirstForm) {
+      formDataToSend.append(`FirstForm[${key}]`, formData.FirstForm[key]);
+    }
 
     // Append product information
     for (const key in formData.ProductInformation) {
@@ -486,13 +527,17 @@ function Form() {
             Comencémos con la venta de tus muebles
           </h1>
           <p className="text-sm pt-2 ">
-            Por favor, llena la siguiente información, no te tomará más de 5 min solo son siete pasos
+            Por favor, llena la siguiente información, no te tomará más de 5 min
+            solo son siete pasos
           </p>
         </div>
 
         <div className="mt-8">
           {sectionStatus.Urgency && (
-            <FirstForm onUrgencyChange={handleUrgencyChange} />
+            <FirstForm
+              onUrgencyChange={handleUrgencyChange}
+              onFoundationToDonate={handleFoundationToDonateChange}
+            />
           )}
         </div>
 
@@ -521,6 +566,8 @@ function Form() {
               onDepthChange={handleDepthChange}
               onWeightChange={handleWeightChange}
               onPriceInputChange={handlePriceInputChange}
+              onDesiredSellingPriceChange={handleDesiredSellingPriceChange}
+              onApproxSellingPrice={handleApproxSellingPriceChange}
               urgency={urgency}
             />
           )}
@@ -561,17 +608,99 @@ function Form() {
         </div>
 
         <br />
-        <div>
-          {isButtonEnabled && (
-            <button
-              type="submit"
-              className=" my-4 border border-slate-400 text-slate-400 py-2 px-10 rounded-md text-sm hover:border-orange-400 hover:text-white hover:bg-orange-400"
-              onChange={handleUrgencyChange}
-            >
-              Guardar y enviar
-            </button>
-          )}
+        <div className="flex flex-row justify-center">
+          <div>
+            {sectionStatus.PaymentInfo && (
+              <button
+                type="button"
+                className="mt-4 mx-2 border border-blue-400 text-blue-400 py-2 px-6 rounded-md text-sm hover:border-blue-600 hover:text-white hover:bg-blue-600"
+                onClick={() => setPreviewModalIsOpen(true)}
+              >
+                Verifica tu información
+              </button>
+            )}
+          </div>
+          <div>
+            {isButtonEnabled && (
+              <button
+                type="submit"
+                className=" mt-4 border border-slate-400 text-slate-400 py-2 px-10 rounded-md text-sm hover:border-orange-400 hover:text-white hover:bg-orange-400"
+                onChange={handleUrgencyChange}
+              >
+                Guardar y enviar
+              </button>
+            )}
+          </div>
         </div>
+
+        <Modal
+          isOpen={previewModalIsOpen}
+          onRequestClose={() => setPreviewModalIsOpen(false)}
+          contentLabel="Tu información"
+          style={{
+            overlay: {
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+            },
+            content: {
+              color: "black",
+              width: "60%",
+              height: "70%",
+              margin: "auto",
+              backgroundColor: "white",
+              borderRadius: "10px",
+              padding: "2rem",
+              alignItems: "start",
+            },
+          }}
+        >
+          <div className="overflow-y-auto h-full">
+            <h2 className="font-bold text-lg text-gray-700">Tu información:</h2>
+            <h3 className="text-md font-semibold mt-4">
+              Información de tu producto:
+            </h3>
+            <p>Producto: {formData.ProductInformation.product}</p>
+            <p>Descripción: {formData.ProductInformation.description}</p>
+            <p>
+              Estado del producto: {formData.ProductInformation.stateOfProduct}
+            </p>
+            <p>Marca: {formData.ProductInformation.brand}</p>
+            <p>Uso: {formData.ProductInformation.usage}</p>
+            <p>Material: {formData.ProductInformation.material}</p>
+            <p>Alto: {formData.ProductInformation.height}</p>
+            <p>Ancho: {formData.ProductInformation.width}</p>
+            <p>Profundidad: {formData.ProductInformation.depth}</p>
+            <p>Peso: {formData.ProductInformation.weight}</p>
+            <p>Material: {formData.ProductInformation.material}</p>
+
+            <h3 className="text-md font-semibold mt-4">
+              Información de Pick-Up:
+            </h3>
+            <p>Ciudad: {formData.VendorInformation.city}</p>
+            <p>Calle: {formData.VendorInformation.address}</p>
+            <p>Código Postal: {formData.VendorInformation.postalCode}</p>
+            <p>Alcaldía/Municipio: {formData.VendorInformation.region}</p>
+            <p>Colonia: {formData.VendorInformation.colony}</p>
+
+            <h3 className="text-md font-semibold mt-4">
+              Datos bancarios y personales
+            </h3>
+            <p>
+              Nombre del Titular: {formData.PaymentInformation.nameOfHolder}
+            </p>
+            <p>CLABE: {formData.PaymentInformation.bankDetails}</p>
+            <p>Nombre del Banco: {formData.PaymentInformation.nameOfBank}</p>
+            <p>Número de cuenta: {formData.PaymentInformation.accountNumber}</p>
+            <p>Teléfono: {formData.PaymentInformation.phone}</p>
+            <p>Email: {formData.PaymentInformation.name}</p>
+
+            <button
+              className="mt-4 border border-gray-400 text-gray-400 py-2 px-4 rounded-md text-sm hover:border-gray-600 hover:text-white hover:bg-gray-600"
+              onClick={() => setPreviewModalIsOpen(false)}
+            >
+              Cerrar Preview
+            </button>
+          </div>
+        </Modal>
       </form>
       <Modal
         isOpen={modalIsOpen}
@@ -616,5 +745,4 @@ function Form() {
     </>
   );
 }
-
 export default Form;

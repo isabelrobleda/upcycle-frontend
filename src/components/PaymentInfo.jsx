@@ -16,10 +16,26 @@ function PaymentInfo({
   const [nameOfBank, setNameBank] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [phone, setPhone] = useState("");
+  const [error, setError] = useState(false);
 
   const handleBankDetailsChange = (e) => {
-    setBankDetails(e.target.value);
-    onBankDetailsChange(e.target.value);
+    const inputValue = e.target.value;
+    const isNumeric = /^\d+$/.test(inputValue); // Checks if only digits are present
+
+    // Check if the value is exactly 18 digits and numeric
+    if (inputValue.length !== 18 || !isNumeric) {
+      if (inputValue.length > 0) {
+        // Only show error if user has started typing
+        setError("Por favor ingresa una CLABE válida de 18 dígitos numéricos.");
+      } else {
+        setError(""); // Clear error if input is empty
+      }
+    } else {
+      setError(""); // Clear error if the input is valid
+    }
+
+    setBankDetails(inputValue);
+    onBankDetailsChange(inputValue);
   };
 
   const handleNameOfHolderChange = (e) => {
@@ -52,7 +68,9 @@ function PaymentInfo({
       <h2 className="font-bold text-xl text-gray-700 text-left">
         6. Datos bancarios para recibir tu pago
       </h2>
-      <p className="text-orange-800 font-semibold text-left text-sm">Si tu producto es para donación, ve al paso 7</p>
+      <p className="text-orange-800 font-semibold text-left text-sm">
+        Si tu producto es para donación, ve al paso 7
+      </p>
       <div>
         <div className="space-y-10">
           <div className="">
@@ -97,6 +115,7 @@ function PaymentInfo({
                 required={urgency !== "donate"}
               />
             </div>
+            {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
             <label
               htmlFor="bank-name"
               className="block text-sm font-medium leading-6 text-gray-700 text-left mt-4"
@@ -134,8 +153,8 @@ function PaymentInfo({
 
             <div className="sm:col-span-2">
               <h2 className="font-bold text-xl text-gray-700 text-left mt-16 mb-2">
-                7. Datos de contacto para agendar el pickup de tu mueble y aclarar
-                dudas.
+                7. Datos de contacto para agendar el pickup de tu mueble y
+                aclarar dudas.
               </h2>
               <label
                 htmlFor="phone"
