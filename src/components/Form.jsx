@@ -735,12 +735,14 @@ function Form() {
           Por favor da click en el siguiente botón para iniciar sesión con
           nosotros
         </p>
-        <button
-          className=" my-4 border border-slate-400 text-slate-400 py-2 px-10 rounded-md text-sm hover:border-orange-400 hover:text-white hover:bg-orange-400"
-          onClick={() => {}}
-        >
-          Iniciar Sesión
-        </button>
+        <Link to="https://upcyclemex.com/account/login">
+          <button
+            className="border border-slate-400 text-slate-400 py-2 px-10 rounded-md text-sm hover:border-orange-400 hover:text-white hover:bg-orange-400"
+          >
+            Iniciar Sesión
+          </button>
+        </Link>
+        
       </Modal>
     </>
   );

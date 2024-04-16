@@ -97,7 +97,7 @@ function FirstForm({ onUrgencyChange, onFoundationToDonate }) {
           {nextQuestionYes && (
             <>
               
-                <div className="w-full mt-4">
+                <div className="w-full mt-4 flex ">
                   <button
                     onClick={handleDonation}
                     className="border border-gray-300 px-4 py-2 rounded-md bg-white hover:bg-gray-100 focus:bg-gray-200 mt-8 text-sm"
