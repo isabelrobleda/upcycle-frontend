@@ -196,7 +196,7 @@ function PaymentInfo({
                 htmlFor="fullName"
                 className="block text-sm font-semibold leading-6 text-gray-700 text-left "
               >
-                Nombre y Apellido
+                Nombre y Apellido *
               </label>
               <div className="mt-1">
                 <input
@@ -215,7 +215,7 @@ function PaymentInfo({
                 htmlFor="phone"
                 className="block text-sm font-semibold leading-6 text-gray-700 text-left mt-3"
               >
-                Celular
+                Celular *
               </label>
               <div className="mt-1">
                 <input
@@ -233,7 +233,7 @@ function PaymentInfo({
                 htmlFor="signature"
                 className="block text-sm font-semibold leading-6 text-gray-700 text-left mt-3"
               >
-                Email
+                Email *
               </label>
               <div className="mt-1">
                 <input
@@ -252,7 +252,7 @@ function PaymentInfo({
                   htmlFor="nationality"
                   className="block text-sm font-semibold mt-4 leading-6 text-gray-700 text-left"
                 >
-                  Nacionalidad
+                  Nacionalidad *
                 </label>
                 <div className="my-2">
                   <select
@@ -276,7 +276,7 @@ function PaymentInfo({
                 htmlFor="birthDate"
                 className="block text-sm font-semibold leading-6 text-gray-700 text-left mt-4"
               >
-                Fecha de Nacimiento
+                Fecha de Nacimiento *
               </label>
               <div className="mt-1">
                 <input
@@ -294,7 +294,7 @@ function PaymentInfo({
                   htmlFor="gender"
                   className="block text-sm font-semibold mt-4 leading-6 text-gray-700 text-left"
                 >
-                  Género
+                  Género *
                 </label>
                 <div className="my-2">
                   <select
@@ -320,7 +320,7 @@ function PaymentInfo({
                   htmlFor="reasonOfSale"
                   className="block text-sm font-semibold mt-4 leading-6 text-gray-700 text-left"
                 >
-                  Motivo de venta
+                  Motivo de venta *
                 </label>
                 <div className="my-2">
                   <select

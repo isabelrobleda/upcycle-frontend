@@ -199,7 +199,7 @@ function ProductOverview({
           htmlFor="brand"
           className="block text-sm font-medium leading-6 text-gray-700 text-left"
         >
-          Marca
+          Marca *
         </label>
         <div className="mt-2">
           <input
@@ -227,7 +227,7 @@ function ProductOverview({
           htmlFor="usage"
           className="block text-sm font-medium leading-6 text-gray-700 text-left"
         >
-          Uso
+          Uso *
         </label>
         <div className="mt-2">
           <select
@@ -259,7 +259,7 @@ function ProductOverview({
           htmlFor="dimensions"
           className="block text-sm  leading-6 text-gray-900 text-left mt-8 font-semibold"
         >
-          Medidas
+          Medidas *
         </label>
         <div className="flex flex-col pr-2 pb-2">
           <div className="flex flex-row items-center">
@@ -330,7 +330,7 @@ function ProductOverview({
           htmlFor="weight"
           className="block text-sm font-medium leading-6 text-gray-700 text-left"
         >
-          Peso
+          Peso *
         </label>
         <div className="my-2">
           <select
@@ -357,7 +357,7 @@ function ProductOverview({
           htmlFor="material"
           className="block text-sm font-medium leading-6 text-gray-700 text-left"
         >
-          Material
+          Material *
         </label>
         <div className="mt-2">
           <select
@@ -416,7 +416,7 @@ function ProductOverview({
         </p>
         <div className="flex md:flex-row flex-col text-left text-sm justify-start text-gray-700 ">
           <label htmlFor="priceInput" className="pr-2">
-            Precio del producto si fuera nuevo hoy (en MXN)*:
+            Precio del producto si fuera nuevo hoy (en MXN) [1]:
           </label>
           <input
             type="text"
@@ -430,7 +430,7 @@ function ProductOverview({
 
         <div className="flex md:flex-row flex-col text-left text-sm justify-start pt-3">
           <label className="pr-2">
-            Precio que te sugerimos de venta (en MXN) **:{" "}
+            Precio que te sugerimos de venta (en MXN) [2]:{" "}
           </label>
           <input
             type="text"
@@ -457,7 +457,7 @@ function ProductOverview({
           <label htmlFor="desiredSellingPrice" className="pr-2">
             Si no estás de acuerdo, ¿a qué precio deseas vender tu producto (en
             MXN)? Al precio que elijas, se añadirá el costo de envío estándar.
-            Como vendedor, recibirás aprox. el 70% de este precio:
+            Como vendedor, recibirás aprox. el 70% de este precio [3]:
           </label>
           <input
             type="text"
@@ -474,13 +474,13 @@ function ProductOverview({
 
         <div className="flex flex-row text-left pt-3">
           <p className="text-gray-700 text-xs pt-3">
-            * ¿Cuánto cuesta tu producto o uno muy similar hoy en la tienda
+            [1] ¿Cuánto cuesta tu producto o uno muy similar hoy en la tienda
             donde lo compraste o una muy similar?
           </p>
         </div>
         <div className="flex flex-row text-left pt-1">
           <p className="text-gray-700 text-xs">
-            ** Éste es el precio en el que te sugerimos vender tu producto
+            [2] Éste es el precio en el que te sugerimos vender tu producto
             tomando en cuenta algunas de las características que nos
             proporcionaste. OJO: el mínimo es de MXN$1,300 y MXN$3,500 para
             menores o mayores de 12 Kg respectivamente.
@@ -488,7 +488,7 @@ function ProductOverview({
         </div>
         <div className="flex flex-row text-left pt-1">
           <p className="text-gray-700 text-xs">
-            ***El precio máximo es el que tendría tu producto si fuera nuevo hoy
+            [3] El precio máximo es el que tendría tu producto si fuera nuevo hoy
             (primer casilla*) así que siéntete libre de reducirlo cuanto desees
             hasta llegar a los mínimos mencionados (MXN$1,300 o MXN$3,500). Te
             sugerimos ofrecer tu producto a un precio competitivo y realista

@@ -97,7 +97,7 @@ function VendorInfo({
             className="block text-sm font-medium leading-6 text-gray-700 text-left"
 
           >
-            Estado
+            Estado *
           </label>
           <div className="mt-2">
             <select
@@ -119,7 +119,7 @@ function VendorInfo({
             htmlFor="street-address"
             className="block text-sm font-medium leading-6 text-gray-700 text-left"
           >
-            Calle
+            Calle *
           </label>
           <div className="mt-2">
             <input
@@ -139,7 +139,7 @@ function VendorInfo({
             htmlFor="city"
             className="block text-sm font-medium leading-6 text-gray-700 text-left"
           >
-            Alcaldía/Municipio
+            Alcaldía/Municipio *
           </label>
           <div className="mt-2">
             <input
@@ -159,7 +159,7 @@ function VendorInfo({
             htmlFor="region"
             className="block text-sm font-medium leading-6 text-gray-700 text-left"
           >
-            Colonia
+            Colonia *
           </label>
           <div className="mt-2">
             <input
@@ -179,7 +179,7 @@ function VendorInfo({
             htmlFor="postal-code"
             className="block text-sm font-medium leading-6 text-gray-700 text-left"
           >
-            C.P. Código Postal
+            C.P. Código Postal *
           </label>
           <div className="mt-2">
             <input
@@ -198,7 +198,7 @@ function VendorInfo({
             htmlFor="link-maps"
             className="block text-sm font-medium leading-6 text-gray-700 text-left"
           >
-            Link de Google Maps (opcional)
+            Link de Google Maps
           </label>
           <input
             type="text"
@@ -210,9 +210,9 @@ function VendorInfo({
           />
         </div>
       </div>
-      <fieldset className="mt-3">
+      <fieldset className="mt-6">
         <legend className="text-sm font-semibold leading-6 text-gray-700 text-left">
-          ¿Hay elevador y cabe en él?
+          ¿Hay elevador y cabe en él? *
         </legend>
 
         <div className="mt-6 space-y-6">
@@ -264,7 +264,7 @@ function VendorInfo({
       </div>
       <fieldset className="mt-3">
         <legend className="text-sm font-semibold leading-6 text-gray-700 text-left">
-        ¿Hay que desarmar el mueble para trasladarlo?
+        ¿Hay que desarmar el mueble para trasladarlo? *
         </legend>
 
         <div className="mt-6 space-y-6">
@@ -304,7 +304,7 @@ function VendorInfo({
       </fieldset>
       <fieldset className="mt-3">
         <legend className="text-sm font-semibold leading-6 text-gray-700 text-left">
-          ¿Se tiene que volar?
+          ¿Se tiene que volar? *
         </legend>
 
         <div className="mt-6 space-y-6">

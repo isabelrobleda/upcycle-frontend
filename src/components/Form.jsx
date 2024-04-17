@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductDetails from "./ProductDetails";
 import Description from "./Description";
 import ProductOverview from "./ProductOverview";
@@ -13,6 +13,7 @@ import Modal from "react-modal";
 
 function Form() {
   const [firstModalisOpen, setFirstModalIsOpen] = useState(true);
+  const [checkboxes, setCheckboxes] = useState({checklist1: false, checklist2: false, checklist3: false, checklist4: false});
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -85,6 +86,15 @@ function Form() {
   const [paymentInfoCompleted, setPaymentInfoCompleted] = useState(false);
   const isButtonEnabled = paymentInfoCompleted || urgency === "donate";
 
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    setCheckboxes((prevCheckboxes) => ({
+      ...prevCheckboxes,
+      [name]: checked,
+    }));
+  };
+
+
   const [previewModalIsOpen, setPreviewModalIsOpen] = useState(false);
 
   const handleUrgencyChange = (urgency) => {
@@ -101,7 +111,12 @@ function Form() {
   };
 
   const handleFirstModalChange = () => {
-    setFirstModalIsOpen(false);
+    if (Object.values(checkboxes).every((checkbox) => checkbox)) {
+      setFirstModalIsOpen(false);
+    } else {
+      // Optionally, you can show a message indicating that all checkboxes must be checked
+      alert('Por favor, marca todas las casillas antes de continuar.');
+    }
   };
 
   const handleFoundationToDonateChange = (foundation) => {
@@ -457,6 +472,17 @@ function Form() {
     }
   };
 
+  useEffect(() => {
+    if (firstModalisOpen) {
+      setCheckboxes({
+        checklist1: false,
+        checklist2: false,
+        checklist3: false,
+        checklist4: false,
+      });
+    }
+  }, [firstModalisOpen]);
+
   return (
     <>
       <div className="flex flex-col items-center">
@@ -494,8 +520,11 @@ function Form() {
             <input
               type="checkbox"
               id="checklist-before-filling-1"
-              name="checklist-1"
+              name="checklist1"
               className="pr-2 text-left"
+              onChange={handleCheckboxChange}
+              checked={checkboxes.checklist1}
+              required={true}
             />
             <label
               htmlFor="checklist-before-filling"
@@ -508,8 +537,11 @@ function Form() {
             <input
               type="checkbox"
               id="checklist-before-filling-2"
-              name="checklist-1"
+              name="checklist2"
               className="pr-2"
+              onChange={handleCheckboxChange}
+              checked={checkboxes.checklist2}
+              required={true}
             />
             <label
               htmlFor="checklist-before-filling"
@@ -522,8 +554,11 @@ function Form() {
             <input
               type="checkbox"
               id="checklist-before-filling-3"
-              name="checklist-1"
+              name="checklist3"
+              onChange={handleCheckboxChange}
+              checked={checkboxes.checklist3}
               className="pr-2"
+              required={true}
             />
             <label
               htmlFor="checklist-before-filling"
@@ -531,6 +566,25 @@ function Form() {
             >
               Cinta métrica para medir tu producto
             </label>
+          </div>
+          <div className="flex flex-column p-1 md:mx-10">
+            <input
+              type="checkbox"
+              id="checklist-before-filling-4"
+              name="checklist4"
+              className="pr-2"
+              onChange={handleCheckboxChange}
+              checked={checkboxes.checklist4}
+              required={true}
+            />
+            <Link to={"https://upcyclemex.com/pages/terminos-y-condiciones"} target="_blank">
+              <label
+                htmlFor="checklist-before-filling"
+                className="text-sm text-gray-700 pl-2 underline hover:text-orange-800"
+              >
+                Haber leído los "Términos y Condiciones"
+              </label>
+            </Link>
           </div>
           <div className="md:mx-10 pt-6 text-sm">
             <p>
@@ -563,8 +617,8 @@ function Form() {
             Comencémos con la venta de tus muebles
           </h1>
           <p className="text-sm pt-2 ">
-            Por favor, llena la siguiente información, no te tomará más de 5 min
-            solo son siete pasos
+            Por favor, llena la siguiente información, solo son siete pasos, no te tomará más de 5 min. Las secciones con * son requeridas
+            
           </p>
         </div>
 

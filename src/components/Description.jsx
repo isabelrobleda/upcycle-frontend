@@ -17,7 +17,7 @@ function Description({ onDescriptionChange, onStateOfProductChange }) {
 
   return (
     <div className="md:mx-36 ">
-      <h2 className="font-bold text-xl text-gray-700 text-left ">2. Descripción de tu producto</h2>
+      <h2 className="font-bold text-xl text-gray-700 text-left ">2. Descripción de tu producto *</h2>
       <div className="flex flex-col">
         <textarea
           name="Description"
