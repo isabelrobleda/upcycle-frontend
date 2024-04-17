@@ -175,17 +175,33 @@ function ProductOverview({
   };
 
   const validateDesiredPrice = (inputValue, weight) => {
+    const inputPrice = parseInt(priceInput);
+    const desiredPrice = parseInt(inputValue);
+  
+    if (isNaN(desiredPrice)) {
+      setDesiredPriceError("Please enter a valid number.");
+      return;
+    }
+  
+    // Check if the desired price is greater than the input price
+    if (desiredPrice > inputPrice) {
+      setDesiredPriceError("El precio deseado no puede ser mayor al precio del producto si fuera nuevo hoy.");
+      return;
+    }
+  
+    // Validate based on weight
     if (weight === "<12kg") {
-      if (parseInt(inputValue) < "1858") {
+      if (desiredPrice < 1858) {
         setDesiredPriceError("El precio deseado debe ser al menos MXN$1858 para pesos menores de 12kg.");
         return;
       }
     } else if (weight === ">12kg") {
-      if (parseInt(inputValue) < "5000") {
+      if (desiredPrice < 5000) {
         setDesiredPriceError("El precio deseado debe ser al menos MXN$5000 para pesos mayores de 12kg.");
         return;
       }
     }
+  
     setDesiredPriceError(""); // Clear any error if the input is valid
   };
 
