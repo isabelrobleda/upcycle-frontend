@@ -78,7 +78,6 @@ function ProductOverview({
     "Otra",
   ];
 
-
   const handleBrandSelect = (e) => {
     setSelected(e.target.value);
     onBrandChange(e.target.value);
@@ -110,12 +109,31 @@ function ProductOverview({
   };
 
   const handleWeightChange = (e) => {
-    setWeight(e.target.value);
-    onWeightChange(e.target.value);
+    const newWeight = e.target.value;
+    setWeight(newWeight);
+    onWeightChange(newWeight);
 
+    // Reset price input when weight changes
     setPriceInput("");
     setDesiredSellingPrice("");
     setApproxSellingPrice("");
+
+    // Set initial price error based on new weight
+    if (newWeight === "<12kg" && priceInput && parseInt(priceInput) < "1300") {
+      setPriceError(
+        "El precio debe ser al menos MXN$1300 para pesos menores de 12kg."
+      );
+    } else if (
+      newWeight === ">12kg" &&
+      priceInput &&
+      parseInt(priceInput) < "3500"
+    ) {
+      setPriceError(
+        "El precio debe ser al menos MXN$3500 para pesos mayores de 12kg."
+      );
+    } else {
+      setPriceError(""); // Clear any error
+    }
   };
 
   const handleMaterialMoreInfoChange = (e) => {
@@ -126,24 +144,27 @@ function ProductOverview({
   const handlePriceInputChange = (e) => {
     const inputValue = e.target.value;
     setPriceInput(inputValue); // Always update the input to reflect user typing
+    onPriceInputChange(inputValue);
+
+    validateInput(inputValue, weight);
+
+  }
+
+    const validateInput = (inputValue, weight) => {
+      if (weight === "<12kg") {
+        if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < 1300) {
+          setPriceError("El precio debe ser al menos MXN$1300 para pesos menores de 12kg.");
+          return;
+        }
+      } else if (weight === ">12kg") {
+        if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < 3500) {
+          setPriceError("El precio debe ser al menos MXN$3500 para pesos mayores de 12kg.");
+          return;
+        }
+      }
     
-    if (weight === "<12kg") {
-      if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < 1300) {
-        setPriceError("El precio debe ser al menos MXN$1300 para pesos menores de 12kg.");
-      } else {
-        setPriceError(""); // Clear error message when input is valid
-      }
-    } else if (weight === ">12kg") {
-      if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < 3500) {
-        setPriceError("El precio debe ser al menos MXN$3500 para pesos mayores de 12kg.");
-      } else {
-        setPriceError(""); // Clear error message when input is valid
-      }
-    } else {
-      setPriceError(""); // Clear any error message if weight is not one of the conditions
-    }
+    setPriceError(""); // Clear any error
   };
-  
 
   const handleDesiredSellingPriceChange = (e) => {
     setDesiredSellingPrice(e.target.value);
@@ -151,41 +172,21 @@ function ProductOverview({
   };
 
   const calculateApproxSellingPrice = () => {
-    // Check if both price input and desired selling price are provided
-    if (priceInput) {
-      // Default discount percentage
-      let discountPercentage = 0.7;
-  
-      // Change discount percentage if urgency is "Discount"
-      if (urgency === "discount") {
-        discountPercentage = 0.6;
-      }
-  
+    if (!priceError && priceInput) {
+      let discountPercentage = urgency === "discount" ? 0.6 : 0.7;
       const newPrice = parseFloat(priceInput);
-      const desiredPrice = parseFloat(desiredSellingPrice);
-  
-      // Calculate approximate selling price based on discount percentage
       let approxPrice = newPrice * discountPercentage;
-  
-      // // Adjust the approximate selling price based on weight selection
-      // if (weight === "<12kg") {
-      //   approxPrice += 383; // Add 330 for weight <12kg
-      // } else if (weight === ">12kg") {
-      //   approxPrice += 1218; // Add 1000 for weight >12kg
-      // }
-  
       setApproxSellingPrice(approxPrice.toFixed(2));
-      onApproxSellingPrice(approxPrice.toFixed(2))
+      onApproxSellingPrice(approxPrice.toFixed(2)); // Call this only if you need to propagate the value
     } else {
-      // Reset the approximate selling price if either of the inputs is missing
       setApproxSellingPrice("");
     }
   };
 
-  // Listen for changes in price input and desired selling price to calculate the approximate selling price
+
   useEffect(() => {
     calculateApproxSellingPrice();
-  }, [priceInput, desiredSellingPrice]);
+  }, [priceInput, priceError]);
 
   return (
     <div className="md:mx-36 mt-16">
@@ -262,61 +263,65 @@ function ProductOverview({
         </label>
         <div className="flex flex-col pr-2 pb-2">
           <div className="flex flex-row items-center">
-          <label
-            htmlFor="height"
-            className="text-sm font-medium leading-6 text-gray-900  mt-2 text-left mr-2"
-          >
-            Alto
-          </label>
-          <img src={Alto} alt="icon-hight" className="h-9 w-14 pr-2"/>
-          <input
-            type="text"
-            id="height"
-            name="height"
-            placeholder="cm"
-            className=" pl-1 w-1/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
-            value={height}
-            onChange={handleHeightChange}
-            required={true}
-          />
+            <label
+              htmlFor="height"
+              className="text-sm font-medium leading-6 text-gray-900  mt-2 text-left mr-2"
+            >
+              Alto
+            </label>
+            <img src={Alto} alt="icon-hight" className="h-9 w-14 pr-2" />
+            <input
+              type="text"
+              id="height"
+              name="height"
+              placeholder="cm"
+              className=" pl-1 w-1/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
+              value={height}
+              onChange={handleHeightChange}
+              required={true}
+            />
           </div>
           <div className="flex flex-row items-center py-2">
-          <label
-            htmlFor="width"
-            className="block text-sm font-medium leading-6 text-gray-900  mt-2 text-left "
-          >
-            Ancho
-          </label>
-          <img src={Largo} alt="icon-width" className="h-10 w-14 px-1" />  
-          <input
-            type="text"
-            id="width"
-            name="width"
-            placeholder="cm"
-            className=" w-1/4 pl-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
-            value={width}
-            onChange={handleWidthChange}
-            required={true}
-          />
+            <label
+              htmlFor="width"
+              className="block text-sm font-medium leading-6 text-gray-900  mt-2 text-left "
+            >
+              Ancho
+            </label>
+            <img src={Largo} alt="icon-width" className="h-10 w-14 px-1" />
+            <input
+              type="text"
+              id="width"
+              name="width"
+              placeholder="cm"
+              className=" w-1/4 pl-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
+              value={width}
+              onChange={handleWidthChange}
+              required={true}
+            />
           </div>
           <div className="flex flex-row items-center pb-2">
-          <label
-            htmlFor="depth"
-            className="block text-sm  font-medium leading-6 text-gray-900  mt-2 text-left "
-          >
-            Profundidad
-          </label>
-          <img src={Profundidad} alt="icon-depths" className="h-10 w-10 pr-1"/>  
-          <input
-            type="text"
-            id="depth"
-            name="depth"
-            placeholder="cm"
-            className=" w-1/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
-            value={depth}
-            onChange={handleDepthChange}
-            required={true}
-          />
+            <label
+              htmlFor="depth"
+              className="block text-sm  font-medium leading-6 text-gray-900  mt-2 text-left "
+            >
+              Profundidad
+            </label>
+            <img
+              src={Profundidad}
+              alt="icon-depths"
+              className="h-10 w-10 pr-1"
+            />
+            <input
+              type="text"
+              id="depth"
+              name="depth"
+              placeholder="cm"
+              className=" w-1/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
+              value={depth}
+              onChange={handleDepthChange}
+              required={true}
+            />
           </div>
         </div>
       </div>
@@ -397,12 +402,21 @@ function ProductOverview({
         />
       </div>
       <div className="border my-8 py-7 px-7 rounded-md border-dotted">
-        <h3 className="text-lg font-bold text-gray-700 text-left">Precio aproximado de venta</h3>
-        <p className="text-gray-700 text-left text-sm pb-1">El precio mínimo de venta al público (sin considerar el costo de envío) es de MXN$1300 para accesorios de menos de 12 Kg (que puedas cargar solo) y MXN$3500 para muebles de más de 12Kg (que necesiten 2 o más personas para moverse).</p>
-        <p className="text-gray-700 text-left text-sm pb-5 font-semibold">Si vas a donar el producto, puedes saltar hasta "Subir tus archivos"</p>
+        <h3 className="text-lg font-bold text-gray-700 text-left">
+          Precio aproximado de venta
+        </h3>
+        <p className="text-gray-700 text-left text-sm pb-1">
+          El precio mínimo de venta al público (sin considerar el costo de
+          envío) es de MXN$1300 para accesorios de menos de 12 Kg (que puedas
+          cargar solo) y MXN$3500 para muebles de más de 12Kg (que necesiten 2 o
+          más personas para moverse).
+        </p>
+        <p className="text-gray-700 text-left text-sm pb-5 font-semibold">
+          Si vas a donar el producto, puedes saltar hasta "Subir tus archivos"
+        </p>
         <div className="flex md:flex-row flex-col text-left text-sm justify-start text-gray-700 ">
           <label htmlFor="priceInput" className="pr-2">
-          Precio del producto si fuera nuevo hoy (en MXN)*:
+            Precio del producto si fuera nuevo hoy (en MXN)*:
           </label>
           <input
             type="text"
@@ -412,22 +426,38 @@ function ProductOverview({
             placeholder={weight === "<12kg" ? "1858" : "3500"}
             className="border-2 border-gray-300 rounded-md p-1 md:w-1/4 text-sm"
           />
-           {priceError && <p className="text-red-500 text-xs mt-2 md:pl-2 ">{priceError}</p>}
         </div>
-       
+
         <div className="flex md:flex-row flex-col text-left text-sm justify-start pt-3">
-          <label className="pr-2">Precio que te sugerimos de venta (en MXN) **: </label>
+          <label className="pr-2">
+            Precio que te sugerimos de venta (en MXN) **:{" "}
+          </label>
           <input
             type="text"
             value={approxSellingPrice}
             readOnly
             className="border-2 border-dotted border-gray-300 rounded-md p-1 md:w-1/4 text-sm"
           />
+          {priceError && (
+            <p className="text-red-500 text-xs mt-2 md:pl-2 ">{priceError}</p>
+          )}
         </div>
-        
+        <div className="flex flex-col text-sm mt-3">
+          <div className="flex flex-row">
+            <label htmlFor="">Estoy de acuerdo con el precio sugerido</label>
+            <input type="radio" name="ok" id="ok-no" className=" ml-1" />
+          </div>
+          <div className="flex flex-row">
+            <label htmlFor="">No estoy de acuerdo con el precio sugerido</label>
+            <input type="radio" name="ok" id="ok-yes" className="ml-1 " />
+          </div>
+        </div>
+
         <div className="flex md:flex-row flex-col  text-sm  text-left justify-start pt-3">
           <label htmlFor="desiredSellingPrice" className="pr-2">
-          Precio en el que tú deseas vender tu producto (en MXN). Al precio que elijas, se añadirá el costo de envío estándar. Como vendedor, recibirás aprox. el 70% de este precio:
+            Si no estás de acuerdo, ¿a qué precio deseas vender tu producto (en
+            MXN)? Al precio que elijas, se añadirá el costo de envío estándar.
+            Como vendedor, recibirás aprox. el 70% de este precio:
           </label>
           <input
             type="text"
@@ -435,22 +465,38 @@ function ProductOverview({
             value={desiredSellingPrice}
             onChange={handleDesiredSellingPriceChange}
             placeholder={weight === "<12kg" ? "1300 " : "3500"}
-            className="border-2 border-gray-300 rounded-md p-1  md:w-1/4 text-sm"
+            className="border-2 border-gray-300 rounded-md p-1  md:w-1/5 text-sm"
           />
+          {priceError && (
+            <p className="text-red-500 text-xs mt-2 md:pl-2 ">{priceError}</p>
+          )}
         </div>
-        
+
         <div className="flex flex-row text-left pt-3">
-          <p className="text-gray-700 text-xs pt-3">* ¿Cuánto cuesta tu producto o uno muy similar hoy en la tienda donde lo compraste o una muy similar?</p>
+          <p className="text-gray-700 text-xs pt-3">
+            * ¿Cuánto cuesta tu producto o uno muy similar hoy en la tienda
+            donde lo compraste o una muy similar?
+          </p>
         </div>
         <div className="flex flex-row text-left pt-1">
-          <p className="text-gray-700 text-xs">** Éste es el precio en el que te sugerimos vender tu producto tomando en cuenta algunas de las características que nos proporcionaste. OJO: el mínimo es de MXN$1,300 y MXN$3,500 para menores o mayores de 12 Kg respectivamente.</p>
+          <p className="text-gray-700 text-xs">
+            ** Éste es el precio en el que te sugerimos vender tu producto
+            tomando en cuenta algunas de las características que nos
+            proporcionaste. OJO: el mínimo es de MXN$1,300 y MXN$3,500 para
+            menores o mayores de 12 Kg respectivamente.
+          </p>
         </div>
         <div className="flex flex-row text-left pt-1">
-          <p className="text-gray-700 text-xs">***El precio máximo es el que tendría tu producto si fuera nuevo hoy (primer casilla*) así que siéntete libre de reducirlo cuanto desees hasta llegar a los mínimos mencionados (MXN$1,300 o MXN$3,500). Te sugerimos ofrecer tu producto a un precio competitivo y realista tomando en cuenta los años de uso y su estado para incentivar su venta con mayor rapidez. </p>
+          <p className="text-gray-700 text-xs">
+            ***El precio máximo es el que tendría tu producto si fuera nuevo hoy
+            (primer casilla*) así que siéntete libre de reducirlo cuanto desees
+            hasta llegar a los mínimos mencionados (MXN$1,300 o MXN$3,500). Te
+            sugerimos ofrecer tu producto a un precio competitivo y realista
+            tomando en cuenta los años de uso y su estado para incentivar su
+            venta con mayor rapidez.{" "}
+          </p>
         </div>
-        
       </div>
-      
     </div>
   );
 }
