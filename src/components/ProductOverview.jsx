@@ -30,6 +30,7 @@ function ProductOverview({
   const [desiredSellingPrice, setDesiredSellingPrice] = useState("");
   const [approxSellingPrice, setApproxSellingPrice] = useState("");
   const [priceError, setPriceError] = useState("");
+  const [desiredPriceError, setDesiredPriceError] = useState(""); 
 
   const brands = [
     "Ninguna/Hecho a la medida",
@@ -152,12 +153,12 @@ function ProductOverview({
 
     const validateInput = (inputValue, weight) => {
       if (weight === "<12kg") {
-        if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < 1300) {
+        if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < "1858") {
           setPriceError("El precio debe ser al menos MXN$1300 para pesos menores de 12kg.");
           return;
         }
       } else if (weight === ">12kg") {
-        if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < 3500) {
+        if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < "5000") {
           setPriceError("El precio debe ser al menos MXN$3500 para pesos mayores de 12kg.");
           return;
         }
@@ -167,8 +168,25 @@ function ProductOverview({
   };
 
   const handleDesiredSellingPriceChange = (e) => {
-    setDesiredSellingPrice(e.target.value);
-    onDesiredSellingPriceChange(e.target.value);
+    const inputValue = e.target.value;
+    setDesiredSellingPrice(inputValue);
+    validateDesiredPrice(inputValue, weight);
+    onDesiredSellingPriceChange(inputValue);
+  };
+
+  const validateDesiredPrice = (inputValue, weight) => {
+    if (weight === "<12kg") {
+      if (parseInt(inputValue) < "1858") {
+        setDesiredPriceError("El precio deseado debe ser al menos MXN$1858 para pesos menores de 12kg.");
+        return;
+      }
+    } else if (weight === ">12kg") {
+      if (parseInt(inputValue) < "5000") {
+        setDesiredPriceError("El precio deseado debe ser al menos MXN$5000 para pesos mayores de 12kg.");
+        return;
+      }
+    }
+    setDesiredPriceError(""); // Clear any error if the input is valid
   };
 
   const calculateApproxSellingPrice = () => {
@@ -186,7 +204,7 @@ function ProductOverview({
 
   useEffect(() => {
     calculateApproxSellingPrice();
-  }, [priceInput, priceError]);
+  }, [priceInput, priceError, desiredPriceError]);
 
   return (
     <div className="md:mx-36 mt-16">
@@ -423,7 +441,7 @@ function ProductOverview({
             id="priceInput"
             value={priceInput}
             onChange={handlePriceInputChange}
-            placeholder={weight === "<12kg" ? "1858" : "3500"}
+            placeholder={weight === "<12kg" ? "1858" : "5000"}
             className="border-2 border-gray-300 rounded-md p-1 md:w-1/4 text-sm"
           />
         </div>
@@ -464,12 +482,12 @@ function ProductOverview({
             id="desiredSellingPrice"
             value={desiredSellingPrice}
             onChange={handleDesiredSellingPriceChange}
-            placeholder={weight === "<12kg" ? "1300 " : "3500"}
+            placeholder={weight === "<12kg" ? "1858 " : "5000"}
             className="border-2 border-gray-300 rounded-md p-1  md:w-1/5 text-sm"
           />
-          {priceError && (
-            <p className="text-red-500 text-xs mt-2 md:pl-2 ">{priceError}</p>
-          )}
+          {desiredPriceError && (
+          <p className="text-red-500 text-xs mt-2 md:pl-2">{desiredPriceError}</p>
+        )}
         </div>
 
         <div className="flex flex-row text-left pt-3">
