@@ -8,6 +8,11 @@ function PaymentInfo({
   onNameBankChange,
   onAccountNumberChange,
   onPhoneChange,
+  onFullNameChange,
+  onNationalityChange,
+  onGenderChange,
+  onBirthDateChange,
+  onReasonOfSaleChange,
   urgency,
 }) {
   const [bankDetails, setBankDetails] = useState("");
@@ -17,6 +22,11 @@ function PaymentInfo({
   const [accountNumber, setAccountNumber] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState(false);
+  const [fullName, setFullName] = useState("");
+  const [nationality, setNationality] = useState("");
+  const [gender, setGender] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [reasonOfSale, setReasonOfSale] = useState("");
 
   const handleBankDetailsChange = (e) => {
     const inputValue = e.target.value;
@@ -61,6 +71,31 @@ function PaymentInfo({
   const handlePhoneChange = (e) => {
     setPhone(e.target.value);
     onPhoneChange(e.target.value);
+  };
+
+  const handleFullNameChange = (e) => {
+    setFullName(e.target.value);
+    onFullNameChange(e.target.value);
+  };
+
+  const handleNationalityChange = (e) => {
+    setNationality(e.target.value);
+    onNationalityChange(e.target.value);
+  };
+
+  const handleGenderChange = (e) => {
+    setGender(e.target.value);
+    onGenderChange(e.target.value);
+  };
+
+  const handleBirthDateChange = (e) => {
+    setBirthDate(e.target.value);
+    onBirthDateChange(e.target.value);
+  };
+
+  const handleReasonOfSaleChange = (e) => {
+    setReasonOfSale(e.target.value);
+    onReasonOfSaleChange(e.target.value);
   };
 
   return (
@@ -156,9 +191,29 @@ function PaymentInfo({
                 7. Datos de contacto para agendar el pickup de tu mueble y
                 aclarar dudas.
               </h2>
+
+              <label
+                htmlFor="fullName"
+                className="block text-sm font-semibold leading-6 text-gray-700 text-left "
+              >
+                Nombre y Apellido
+              </label>
+              <div className="mt-1">
+                <input
+                  type="text"
+                  name="fullName"
+                  id="fullName"
+                  placeholder="Juan Pérez"
+                  className="block w-full pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
+                  value={fullName}
+                  onChange={handleFullNameChange}
+                  required={true}
+                />
+              </div>
+
               <label
                 htmlFor="phone"
-                className="block text-sm font-medium leading-6 text-gray-700 text-left"
+                className="block text-sm font-semibold leading-6 text-gray-700 text-left mt-3"
               >
                 Celular
               </label>
@@ -176,7 +231,7 @@ function PaymentInfo({
               </div>
               <label
                 htmlFor="signature"
-                className="block text-sm font-medium leading-6 text-gray-700 text-left"
+                className="block text-sm font-semibold leading-6 text-gray-700 text-left mt-3"
               >
                 Email
               </label>
@@ -191,6 +246,98 @@ function PaymentInfo({
                   onChange={handleNameChange}
                   required={true}
                 />
+              </div>
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="nationality"
+                  className="block text-sm font-semibold mt-4 leading-6 text-gray-700 text-left"
+                >
+                  Nacionalidad
+                </label>
+                <div className="my-2">
+                  <select
+                    id="nationality"
+                    name="nationality"
+                    autoComplete="nationality-name"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:max-w-xs sm:text-sm sm:leading-6"
+                    value={nationality}
+                    onChange={handleNationalityChange}
+                    required={true}
+                  >
+                    <option disabled hidden value="">
+                      Selecciona una opción
+                    </option>
+                    <option>Mexicana</option>
+                    <option>Extranjera</option>
+                  </select>
+                </div>
+              </div>
+              <label
+                htmlFor="birthDate"
+                className="block text-sm font-semibold leading-6 text-gray-700 text-left mt-4"
+              >
+                Fecha de Nacimiento
+              </label>
+              <div className="mt-1">
+                <input
+                  type="date"
+                  name="birthDate"
+                  id="birthDate"
+                  placeholder="10 de octubre 1985"
+                  className="block w-full pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
+                  value={birthDate}
+                  onChange={handleBirthDateChange}
+                />
+              </div>
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="gender"
+                  className="block text-sm font-semibold mt-4 leading-6 text-gray-700 text-left"
+                >
+                  Género
+                </label>
+                <div className="my-2">
+                  <select
+                    id="gender"
+                    name="gender"
+                    autoComplete="gender-name"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:max-w-xs sm:text-sm sm:leading-6"
+                    value={gender}
+                    onChange={handleGenderChange}
+                  >
+                    <option disabled hidden value="">
+                      Selecciona una opción
+                    </option>
+                    <option>Hombre</option>
+                    <option>Mujer</option>
+                    <option>Otro</option>
+                  </select>
+                </div>
+              </div>
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="reasonOfSale"
+                  className="block text-sm font-semibold mt-4 leading-6 text-gray-700 text-left"
+                >
+                  Motivo de venta
+                </label>
+                <div className="my-2">
+                  <select
+                    id="reasonOfSale"
+                    name="reasonOfSale"
+                    autoComplete="reasonOfSale-name"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:max-w-xs sm:text-sm sm:leading-6"
+                    value={reasonOfSale}
+                    onChange={handleReasonOfSaleChange}
+                  >
+                    <option disabled hidden value="">
+                      Selecciona una opción
+                    </option>
+                    <option>Mudanza</option>
+                    <option>Remodelación</option>
+                    <option>Años de uso</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>

@@ -277,6 +277,42 @@ function Form() {
     });
   };
 
+  const handleFullNameChange = (fullName) => {
+    setFormData({
+      ...formData,
+      PaymentInformation: { ...formData.PaymentInformation, fullName },
+    });
+  }
+
+  const handleNationalityChange = (nationality) => {
+    setFormData({
+      ...formData,
+      PaymentInformation: { ...formData.PaymentInformation, nationality },
+  })
+  }
+
+  const handleBirthDateChange = (birthDate) => {
+    setFormData({
+      ...formData,
+      PaymentInformation: { ...formData.PaymentInformation, birthDate },
+  })
+  }
+
+  const handleGenderChange = (gender) => {
+    setFormData({
+      ...formData,
+      PaymentInformation: { ...formData.PaymentInformation, gender },
+  })
+  }
+
+  const handleReasonOfSaleChange = (reasonOfSale) => {
+    setFormData({
+      ...formData,
+      PaymentInformation: { ...formData.PaymentInformation, reasonOfSale },
+  })
+  }
+
+
   const handleCityChange = (city) => {
     setFormData({
       ...formData,
@@ -602,6 +638,11 @@ function Form() {
               onNameBankChange={handleNameOfBankChange}
               onAccountNumberChange={handleAccountNumberChange}
               onPhoneChange={handlePhoneChange}
+              onFullNameChange={handleFullNameChange}
+              onNationalityChange={handleNationalityChange}
+              onBirthDateChange={handleBirthDateChange}
+              onGenderChange={handleGenderChange}
+              onReasonOfSaleChange={handleReasonOfSaleChange}
               urgency={urgency}
             />
           )}
@@ -692,6 +733,11 @@ function Form() {
             <p>Número de cuenta: {formData.PaymentInformation.accountNumber}</p>
             <p>Teléfono: {formData.PaymentInformation.phone}</p>
             <p>Email: {formData.PaymentInformation.name}</p>
+            <p>Nombre completo: {formData.PaymentInformation.fullName}</p>
+            <p>Nacionalidad: {formData.PaymentInformation.nationality}</p>
+            <p>Fecha de nacimiento: {formData.PaymentInformation.birthDate}</p>
+            <p>Género: {formData.PaymentInformation.gender}</p>
+            <p>Razón de venta: {formData.PaymentInformation.reasonOfSale}</p>
 
             <button
               className="mt-4 border border-gray-400 text-gray-400 py-2 px-4 rounded-md text-sm hover:border-gray-600 hover:text-white hover:bg-gray-600"

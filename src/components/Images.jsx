@@ -5,6 +5,7 @@ import Angulos from "../assets/iconos-angulos.png";
 import Light from "../assets/foco-icon.png";
 import Resolution from "../assets/resolucion-icon.png";
 import Limpieza from "../assets/limpieza-icon.png";
+import CentralProduct from "../assets/central-product.png";
 
 function Images() {
   const [UploadImages, setUploadImages] = useState([]);
@@ -109,7 +110,10 @@ function Images() {
           </div>
           <div className="block md:px-28">
             <input type="checkbox" name="checkbox-photos" id="checkbox-2"/>
-            <label htmlFor="checkbox-photos" className="pl-2   text-sm"><b>La foto estelar: </b> Ésta será la foto principal de tu producto en el catálogo. Tu producto debe apreciarse de frente lo más centrado posible.  </label>
+            <label htmlFor="checkbox-photos" className="pl-2 text-sm"><b>La foto estelar: </b> Ésta será la foto principal de tu producto en el catálogo. Tu producto debe apreciarse de frente lo más centrado posible.  </label>
+          </div>
+          <div className="flex flex-col items-center ">
+            <img src={CentralProduct} alt="central-product" className="w-44"/>
           </div>
           <div className="block md:px-28">
             <input type="checkbox" name="checkbox-photos" id="checkbox-3"/>
