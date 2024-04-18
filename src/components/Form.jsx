@@ -462,7 +462,7 @@ function Form() {
 
     try {
       const response = await axios.post(
-        "https://localhost:5005/api/vendor-form",
+        "http://localhost:5005/api/vendor-form",
         formDataToSend
       );
       return response.data;
