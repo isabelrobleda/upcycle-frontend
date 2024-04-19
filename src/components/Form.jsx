@@ -12,6 +12,7 @@ import FirstForm from "./FirstForm";
 import Modal from "react-modal";
 
 function Form() {
+  const API_URL = import.meta.env.API_URL;
   const [firstModalisOpen, setFirstModalIsOpen] = useState(true);
   const [checkboxes, setCheckboxes] = useState({checklist1: false, checklist2: false, checklist3: false, checklist4: false});
 
@@ -462,7 +463,7 @@ function Form() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5005/api/vendor-form",
+        `${API_URL}/api/vendor-form`,
         formDataToSend
       );
       return response.data;
