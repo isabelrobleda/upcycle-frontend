@@ -12,7 +12,7 @@ import FirstForm from "./FirstForm";
 import Modal from "react-modal";
 
 function Form() {
-  const API_URL = import.meta.env.API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
   const [firstModalisOpen, setFirstModalIsOpen] = useState(true);
   const [checkboxes, setCheckboxes] = useState({checklist1: false, checklist2: false, checklist3: false, checklist4: false});
 
@@ -425,7 +425,8 @@ function Form() {
   const upload = async (formData, files) => {
     const formDataToSend = new FormData();
 
-    console.log(JSON.stringify(formDataToSend, null, 2));
+    console.log('API URL:', API_URL);
+
     // Append urgency and foundation to donate fields
     for (const key in formData.FirstForm) {
       formDataToSend.append(`FirstForm[${key}]`, formData.FirstForm[key]);
