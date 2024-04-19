@@ -425,8 +425,6 @@ function Form() {
   const upload = async (formData, files) => {
     const formDataToSend = new FormData();
 
-    console.log('API URL:', API_URL);
-
     // Append urgency and foundation to donate fields
     for (const key in formData.FirstForm) {
       formDataToSend.append(`FirstForm[${key}]`, formData.FirstForm[key]);
