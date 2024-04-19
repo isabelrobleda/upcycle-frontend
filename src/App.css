@@ -42,9 +42,10 @@
 }
 
 @font-face {
-  font-family: "Roxborough CF";
-  src: url("./assets/Roxborough\ CF.ttf");
+  font-family: 'Roxborough CF';
+  src: url('/assets/Roxborough CF.ttf') format('truetype');
 }
+
 
 body {
   font-family: "Roxborough CF";
