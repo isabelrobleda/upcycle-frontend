@@ -264,7 +264,7 @@ function VendorInfo({
       </div>
       <fieldset className="mt-3">
         <legend className="text-sm font-semibold leading-6 text-gray-700 text-left">
-        ¿Hay que desarmar el mueble para trasladarlo? *
+        ¿Hay que desarmar el mueble para sacarlo de tu casa? *
         </legend>
 
         <div className="mt-6 space-y-6">

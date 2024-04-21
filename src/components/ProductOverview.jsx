@@ -30,7 +30,8 @@ function ProductOverview({
   const [desiredSellingPrice, setDesiredSellingPrice] = useState("");
   const [approxSellingPrice, setApproxSellingPrice] = useState("");
   const [priceError, setPriceError] = useState("");
-  const [desiredPriceError, setDesiredPriceError] = useState(""); 
+  const [desiredPriceError, setDesiredPriceError] = useState("");
+  const [agreeWithPrice, setAgreeWithPrice] = useState(null);
 
   const brands = [
     "Ninguna/Hecho a la medida",
@@ -148,22 +149,25 @@ function ProductOverview({
     onPriceInputChange(inputValue);
 
     validateInput(inputValue, weight);
+  };
 
-  }
-
-    const validateInput = (inputValue, weight) => {
-      if (weight === "<12kg") {
-        if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < "1858") {
-          setPriceError("El precio debe ser al menos MXN$1300 para pesos menores de 12kg.");
-          return;
-        }
-      } else if (weight === ">12kg") {
-        if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < "5000") {
-          setPriceError("El precio debe ser al menos MXN$3500 para pesos mayores de 12kg.");
-          return;
-        }
+  const validateInput = (inputValue, weight) => {
+    if (weight === "<12kg") {
+      if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < "1858") {
+        setPriceError(
+          "Este monto debe ser mayor que MXN$1,858 para productos de menos de 12Kg."
+        );
+        return;
       }
-    
+    } else if (weight === ">12kg") {
+      if (!/^\d+$/.test(inputValue) || parseInt(inputValue) < "5000") {
+        setPriceError(
+          "Este monto debe ser mayor que MXN$5,000 para productos de más de 12 Kg."
+        );
+        return;
+      }
+    }
+
     setPriceError(""); // Clear any error
   };
 
@@ -177,31 +181,37 @@ function ProductOverview({
   const validateDesiredPrice = (inputValue, weight) => {
     const inputPrice = parseInt(priceInput);
     const desiredPrice = parseInt(inputValue);
-  
+
     if (isNaN(desiredPrice)) {
       setDesiredPriceError("Please enter a valid number.");
       return;
     }
-  
+
     // Check if the desired price is greater than the input price
     if (desiredPrice > inputPrice) {
-      setDesiredPriceError("El precio deseado no puede ser mayor al precio del producto si fuera nuevo hoy.");
+      setDesiredPriceError(
+        "El precio deseado no puede ser mayor al precio del producto si fuera nuevo hoy."
+      );
       return;
     }
-  
+
     // Validate based on weight
     if (weight === "<12kg") {
       if (desiredPrice < 1858) {
-        setDesiredPriceError("El precio deseado debe ser al menos MXN$1858 para pesos menores de 12kg.");
+        setDesiredPriceError(
+          "El precio deseado debe ser al menos MXN$1858 para pesos menores de 12kg."
+        );
         return;
       }
     } else if (weight === ">12kg") {
       if (desiredPrice < 5000) {
-        setDesiredPriceError("El precio deseado debe ser al menos MXN$5000 para pesos mayores de 12kg.");
+        setDesiredPriceError(
+          "El precio deseado debe ser al menos MXN$5000 para pesos mayores de 12kg."
+        );
         return;
       }
     }
-  
+
     setDesiredPriceError(""); // Clear any error if the input is valid
   };
 
@@ -215,6 +225,10 @@ function ProductOverview({
     } else {
       setApproxSellingPrice("");
     }
+  };
+
+  const handleRadioChange = (event) => {
+    setAgreeWithPrice(event.target.value);
   };
 
 
@@ -450,7 +464,7 @@ function ProductOverview({
         </p>
         <div className="flex md:flex-row flex-col text-left text-sm justify-start text-gray-700 ">
           <label htmlFor="priceInput" className="pr-2">
-            Precio del producto si fuera nuevo hoy (en MXN) [1]:
+            A) Precio del producto si fuera <b>nuevo </b>hoy (en MXN) [1]:
           </label>
           <input
             type="text"
@@ -460,11 +474,16 @@ function ProductOverview({
             placeholder={weight === "<12kg" ? "1858" : "5000"}
             className="border-2 border-gray-300 rounded-md p-1 md:w-1/4 text-sm"
           />
+          {priceError && (
+            <p className="text-red-500 text-xs mt-2 md:pl-2 ">{priceError}</p>
+          )}
         </div>
 
         <div className="flex md:flex-row flex-col text-left text-sm justify-start pt-3">
-          <label className="pr-2">
-            Precio que te sugerimos de venta (en MXN) [2]:{" "}
+          <label>
+            B) Precio que te <b>sugerimos</b> de venta (en MXN). A este precio
+            se añadirá el costo de envío estándar. Como vendedor, recibirás
+            aprox. el 70% de este precio. [2]:{" "}
           </label>
           <input
             type="text"
@@ -472,39 +491,47 @@ function ProductOverview({
             readOnly
             className="border-2 border-dotted border-gray-300 rounded-md p-1 md:w-1/4 text-sm"
           />
-          {priceError && (
-            <p className="text-red-500 text-xs mt-2 md:pl-2 ">{priceError}</p>
-          )}
+          <p className=" text-red-500 text-xs pl-2">
+            Este campo no se puede modificar.
+          </p>
         </div>
         <div className="flex flex-col text-sm mt-3">
           <div className="flex flex-row">
+            <input type="radio" name="ok" id="ok-no" className=" mr-1" value="yes"
+                checked={agreeWithPrice === "yes"}
+                onChange={handleRadioChange}/>
             <label htmlFor="">Estoy de acuerdo con el precio sugerido</label>
-            <input type="radio" name="ok" id="ok-no" className=" ml-1" />
           </div>
           <div className="flex flex-row">
+            <input type="radio" name="ok" id="ok-yes" className="mr-1 " value="no"
+                checked={agreeWithPrice === "no"}
+                onChange={handleRadioChange} />
             <label htmlFor="">No estoy de acuerdo con el precio sugerido</label>
-            <input type="radio" name="ok" id="ok-yes" className="ml-1 " />
           </div>
         </div>
 
-        <div className="flex md:flex-row flex-col  text-sm  text-left justify-start pt-3">
-          <label htmlFor="desiredSellingPrice" className="pr-2">
-            Si no estás de acuerdo, ¿a qué precio deseas vender tu producto (en
-            MXN)? Al precio que elijas, se añadirá el costo de envío estándar.
-            Como vendedor, recibirás aprox. el 70% de este precio [3]:
-          </label>
-          <input
-            type="text"
-            id="desiredSellingPrice"
-            value={desiredSellingPrice}
-            onChange={handleDesiredSellingPriceChange}
-            placeholder={weight === "<12kg" ? "1858 " : "5000"}
-            className="border-2 border-gray-300 rounded-md p-1  md:w-1/5 text-sm"
-          />
-          {desiredPriceError && (
-          <p className="text-red-500 text-xs mt-2 md:pl-2">{desiredPriceError}</p>
+        {agreeWithPrice === "no" && (
+          <div className="flex md:flex-row flex-col text-sm text-left justify-start pt-3">
+            <label htmlFor="desiredSellingPrice" className="pr-2">
+              C) Si no estás de acuerdo, ¿a qué precio <b>deseas</b> vender tu producto (en MXN)? A este precio se añadirá
+el costo de envío estándar. Como vendedor, recibirás
+aprox. el 70% de este precio. [3]:
+            </label>
+            <input
+              type="text"
+              id="desiredSellingPrice"
+              value={desiredSellingPrice}
+              onChange={handleDesiredSellingPriceChange}
+              placeholder={weight === "<12kg" ? "1858 " : "5000"}
+              className="border-2 border-gray-300 rounded-md p-1 md:w-1/5 text-sm"
+            />
+             
+              <p className="text-red-500 text-xs mt-2 md:pl-2">Este
+monto debe estar entre MXN$1,300 o MXN$3,500 y el
+precio sugerido en B) según el peso de tu producto.</p>
+            
+          </div>
         )}
-        </div>
 
         <div className="flex flex-row text-left pt-3">
           <p className="text-gray-700 text-xs pt-3">
@@ -522,12 +549,9 @@ function ProductOverview({
         </div>
         <div className="flex flex-row text-left pt-1">
           <p className="text-gray-700 text-xs">
-            [3] El precio máximo es el que tendría tu producto si fuera nuevo hoy
-            (primer casilla*) así que siéntete libre de reducirlo cuanto desees
-            hasta llegar a los mínimos mencionados (MXN$1,300 o MXN$3,500). Te
-            sugerimos ofrecer tu producto a un precio competitivo y realista
-            tomando en cuenta los años de uso y su estado para incentivar su
-            venta con mayor rapidez.{" "}
+            [3] “Para este precio toma en cuenta que el límite inferior es
+            MXN$1,300 o MXN$3,500, dependiendo de si tu producto pesa menos o
+            más de 12 Kg y el límite superior es el precio sugerido en B).”{" "}
           </p>
         </div>
       </div>

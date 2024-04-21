@@ -54,7 +54,12 @@ function Images() {
         4. Sube tus archivos *
       </h2>
       <p className="text-sm text-left text-gray-700 py-1">Añade al menos 4 fotos de su artículo desde varios ángulos. Los anuncios con mejores fotos se venden más rápido.</p>
-      <p className="text-sm text-left text-gray-700 py-1">Si quieres vender línea blanca o electrónicos, sube un video de max. 10 segundos y 20MB para asegurarnos que funciona.</p>
+      <p className="text-sm text-left text-gray-700 py-1">Si quieres vender línea blanca o
+electrónicos, sube un video de max. 10
+segundos y 20MB en donde (i) se vea el
+producto encendido y trabajando; y (ii)
+salga un calcetín para que comprobemos
+que es un video reciente.</p>
       <p  onClick={handleInstructions} className="py-2 px-2 my-2 text-orange-400 font-semibold text-sm  hover:cursor-pointer border border-orange-400 rounded-md text-left hover:bg-orange-400 hover:text-white">
         Guía para tomar las mejores fotos y que vendas lo
         más rápido posible
@@ -86,20 +91,20 @@ function Images() {
             <h2 className="font-bold text-xl text-gray-700 text-center">Cómo tomar las mejores fotos</h2>
           </div>
           <div className="md:flex md:flex-col items-center align-middle py-4">
-            <div className="md:flex md:flex-row border-orange-300 rounded-md p-4 bg-orange-300 md:w-1/2 items-center">
+            <div className="md:flex md:flex-row border-orange-600 rounded-md p-4 bg-orange-600  md:w-1/2 items-center">
               <img src={Light} alt="icon-light" className="w-24 "/>
               <p className="text-white text-sm text-left">Asegúrate de tomar las fotos y videos de preferencia de día y con muy buena iluminación. Puedes asistirte con alguna lámpara que ilumine bien tu producto. De esta manera podrán verse mejor todos los detalles. </p>
             </div> 
           </div> 
 
           <div className="flex flex-col items-center align-middle py-4">
-            <div className="md:flex md:flex-row border-orange-300 rounded-md p-4 bg-orange-300 md:w-1/2 items-center">
+            <div className="md:flex md:flex-row border-orange-300 rounded-md p-4  bg-orange-600  md:w-1/2 items-center">
               <img src={Resolution} alt="icon-resolution" className="w-24"/>
-              <p className="text-white text-sm text-left">Procura tomar tus fotos con un celular que tenga la mejor resolución posible (aceptamos hast 20MB por archivo). Tus archivos no pueden verse borrosos.  </p>
+              <p className="text-white text-sm text-left">Procura tomar tus fotos con un celular que tenga la mejor resolución posible (aceptamos hasta 20MB por archivo). Tus archivos no pueden verse borrosos.  </p>
             </div> 
           </div> 
           <div className="flex flex-col items-center align-middle py-4">
-            <div className="md:flex md:flex-row border rounded-md p-4 bg-orange-300 md:w-1/2 items-center">
+            <div className="md:flex md:flex-row border rounded-md p-4  bg-orange-600  md:w-1/2 items-center">
               <img src={Limpieza} alt="icon-light" className="w-24"/>
               <p className="text-white text-sm text-left">Es indispensable que tu producto esté completamente limpio y ordenado. Por ejemplo, si tu producto es una cama, procura que esté perfectamente tendida y su alrededor se vea limpio y ordenado.  </p>
             </div> 
