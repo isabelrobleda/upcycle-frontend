@@ -74,12 +74,19 @@ function Form() {
 
   const [foundationToDonate, setFoundationToDonate] = useState("");
 
+  const [isLoading, setIsLoading] = useState(false); 
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); 
     try {
       const response = await upload(formData, UploadImages);
+      setIsLoading(false);
       setModalIsOpen(true);
     } catch (error) {
+      setIsLoading(false); 
       console.error("Error uploading form data:", error);
     }
   };
@@ -722,7 +729,7 @@ function Form() {
                 className=" mt-4 border border-slate-400 text-slate-400 py-2 px-10 rounded-md text-sm hover:border-orange-400 hover:text-white hover:bg-orange-400"
                 onChange={handleUrgencyChange}
               >
-                Guardar y enviar
+                {isLoading ? "Cargando..." : "Guardar y enviar"}
               </button>
             )}
           </div>
