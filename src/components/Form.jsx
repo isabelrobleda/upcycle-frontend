@@ -14,7 +14,7 @@ import Modal from "react-modal";
 function Form() {
   const API_URL = import.meta.env.VITE_API_URL;
   const [firstModalisOpen, setFirstModalIsOpen] = useState(true);
-  const [checkboxes, setCheckboxes] = useState({checklist1: false, checklist2: false, checklist3: false, checklist4: false});
+  const [checkboxes, setCheckboxes] = useState({checklist1: false, checklist2: false, checklist3: false, checklist4: false, checklist5: false});
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -486,6 +486,7 @@ function Form() {
         checklist2: false,
         checklist3: false,
         checklist4: false,
+        checklist5: false,
       });
     }
   }, [firstModalisOpen]);
@@ -590,6 +591,25 @@ function Form() {
                 className="text-sm text-gray-700 pl-2 underline hover:text-orange-800"
               >
                 Haber leído los "Términos y Condiciones"
+              </label>
+            </Link>
+            </div>
+          <div className="flex flex-column p-1 md:mx-10">
+          <input
+              type="checkbox"
+              id="checklist-before-filling-5"
+              name="checklist5"
+              className="pr-2"
+              onChange={handleCheckboxChange}
+              checked={checkboxes.checklist5}
+              required={true}
+            />
+            <Link to={"https://upcyclemex.com/pages/aviso-de-privacidad"} target="_blank">
+              <label
+                htmlFor="checklist-before-filling"
+                className="text-sm text-gray-700 pl-2 underline hover:text-orange-800"
+              >
+                Haber leído nuestro "Aviso de Privacidad"
               </label>
             </Link>
           </div>
