@@ -219,10 +219,11 @@ function VendorInfo({
           <div className="flex items-center gap-x-3">
             <input
               id="elevator-yes"
-              name="elevator-yes"
+              name="elevator"
               type="radio"
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
-              onChange={handleElevatorChange}
+              onChange={() => setElevator(true)}
+              checked={elevator === true} 
               required={true}
             />
             <label
@@ -235,10 +236,11 @@ function VendorInfo({
           <div className="flex items-center gap-x-3">
             <input
               id="elevator-no"
-              name="elevator-no"
+              name="elevator"
               type="radio"
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
-              onChange={handleElevatorChange}
+              onChange={() => setElevator(false)}
+              checked={elevator === false} 
               required={true}
             />
             <label
@@ -271,10 +273,11 @@ function VendorInfo({
           <div className="flex items-center gap-x-3">
             <input
               id="dismantle-yes"
-              name="dismantle-yes"
+              name="dismantle"
               type="radio"
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
-              onChange={handleDismantleChange}
+              onChange={setDismantle(true)}
+              checked={dismantle === true}
               required={true}
             />
             <label
@@ -287,10 +290,11 @@ function VendorInfo({
           <div className="flex items-center gap-x-3">
             <input
               id="dismanlte-no"
-              name="dismantle-no"
+              name="dismantle"
               type="radio"
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
-              onChange={handleDismantleChange}
+              onChange={setDismantle(false)}
+              checked={dismantle === false}
               required={true}
             />
             <label
@@ -314,7 +318,8 @@ function VendorInfo({
               name="special-pickup"
               type="radio"
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
-              onChange={handleSeVuelaChange}
+              onChange={setSeVuela(true)}
+              checked={seVuela === true}
               required={true}
             />
             <label
@@ -327,10 +332,11 @@ function VendorInfo({
           <div className="flex items-center gap-x-3">
             <input
               id="special-pickup-no"
-              name="special-pickup-no"
+              name="special-pickup"
               type="radio"
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
-              onChange={handleSeVuelaChange}
+              onChange={setSeVuela(false)}
+              checked={seVuela === false}
               required={true}
             />
             <label
