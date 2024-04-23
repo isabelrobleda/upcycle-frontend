@@ -57,18 +57,21 @@ function VendorInfo({
   };
 
   const handleElevatorChange = (e) => {
-    setElevator(e.target.checked);
-    onElevatorChange(e.target.checked);
+    const checked = e.target.value === 'true'
+    setElevator(checked);
+    onElevatorChange(checked);
   };
 
   const handleDismantleChange = (e) => {
-    setDismantle(e.target.checked);
-    onDismantleChange(e.target.checked);
+    const checked = e.target.value === 'true'
+    setDismantle(checked);
+    onDismantleChange(checked);
   }
 
   const handleSeVuelaChange = (e) => {
-    setSeVuela(e.target.checked);
-    onSeVuelaChange(e.target.checked);
+    const checked = e.target.value === 'true'
+    setSeVuela(checked);
+    onSeVuelaChange(checked);
   };
 
   const handleNoElevatorFloorsChange = (e) => {
@@ -222,7 +225,8 @@ function VendorInfo({
               name="elevator"
               type="radio"
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
-              onChange={() => setElevator(true)}
+              onChange={handleElevatorChange}
+              value={true}
               checked={elevator === true} 
               required={true}
             />
@@ -239,7 +243,8 @@ function VendorInfo({
               name="elevator"
               type="radio"
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
-              onChange={() => setElevator(false)}
+              onChange={handleElevatorChange}
+              value={false}
               checked={elevator === false} 
               required={true}
             />
@@ -276,7 +281,8 @@ function VendorInfo({
               name="dismantle"
               type="radio"
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
-              onChange={setDismantle(true)}
+              onChange={handleDismantleChange}
+              value={true}
               checked={dismantle === true}
               required={true}
             />
@@ -293,7 +299,8 @@ function VendorInfo({
               name="dismantle"
               type="radio"
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
-              onChange={setDismantle(false)}
+              onChange={handleDismantleChange}
+              value={false}
               checked={dismantle === false}
               required={true}
             />
@@ -318,7 +325,8 @@ function VendorInfo({
               name="special-pickup"
               type="radio"
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
-              onChange={setSeVuela(true)}
+              onChange={handleSeVuelaChange}
+              value={true}
               checked={seVuela === true}
               required={true}
             />
@@ -335,7 +343,8 @@ function VendorInfo({
               name="special-pickup"
               type="radio"
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
-              onChange={setSeVuela(false)}
+              onChange={handleSeVuelaChange}
+              value={false}
               checked={seVuela === false}
               required={true}
             />
