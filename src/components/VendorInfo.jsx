@@ -20,11 +20,11 @@ function VendorInfo({
   const [region, setRegion] = useState("");
   const [colony, setColony] = useState("");
   const [map, setMap] = useState("");
-  const [elevator, setElevator] = useState(false);
+  const [elevator, setElevator] = useState(null);
   const [floorsElevator, setNoElevatorFloors] = useState("")
-  const [seVuela, setSeVuela] = useState(false);
+  const [seVuela, setSeVuela] = useState(null);
   const [floors, setFloors] = useState("");
-  const [dismantle, setDismantle] = useState(false);
+  const [dismantle, setDismantle] = useState(null);
 
   const handleCityChange = (e) => {
     setCity(e.target.value);
