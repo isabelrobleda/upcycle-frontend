@@ -26,6 +26,11 @@ function Images() {
     const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "video/mp4", "video/mov"];
     const maxSize = 20 * 1024 * 1024;
 
+    if (selectedFiles.length > 10) {
+      setError("No puedes subir más de 10 archivos.");
+      return;
+    }
+
     for(let file of selectedFiles) {
       if(!allowedTypes.includes(file.type)) {
         setError("Solo se permiten archivos PNG, JPG, MOV y MP4 para videos");
