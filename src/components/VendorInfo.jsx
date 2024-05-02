@@ -25,6 +25,7 @@ function VendorInfo({
   const [seVuela, setSeVuela] = useState(null);
   const [floors, setFloors] = useState("");
   const [dismantle, setDismantle] = useState(null);
+  const [error, setError] = useState("");
 
   const handleCityChange = (e) => {
     setCity(e.target.value);
@@ -259,7 +260,7 @@ function VendorInfo({
       </fieldset>
       <div className="flex flex-row items-center">
         <label className="text-left my-2 mr-2 text-sm font-medium leading-6 text-gray-700">
-          Si no hay elevador, ¿cuántos pisos se tiene que subir?{" "}
+          Si no hay elevador, ¿cuántos pisos?{" "}
         </label>
         <input
           type="number"

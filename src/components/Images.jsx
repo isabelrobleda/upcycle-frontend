@@ -159,7 +159,7 @@ que es un video reciente.</p>
             </label>
           </div>
           <p className="text-xs leading-5 text-grey-700 text-left ml-2 mt-1 ">
-           PNG, JPG, MOV y MP4. Hasta 20MB por archivo y hasta 5 archivos.
+           PNG, JPG, MOV y MP4. Hasta 20MB por archivo y hasta 10 archivos.
           </p>
           {error && <p className="text-red-600 text-sm text-left font-semibold ml-2">{error}</p>}
         </div>

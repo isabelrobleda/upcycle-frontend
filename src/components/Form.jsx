@@ -76,9 +76,6 @@ function Form() {
 
   const [isLoading, setIsLoading] = useState(false); 
 
-  
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -496,7 +493,7 @@ function Form() {
   return (
     <>
       <div className="flex flex-col items-center">
-        <img src={Logo} alt="logo-upcycle" className="w-60 mb-8" />
+        <Link to={"https://upcyclemex.com/"}><img src={Logo} alt="logo-upcycle" className="w-60 mb-8" /></Link>
       </div>
       <Modal
         isOpen={firstModalisOpen}
@@ -540,7 +537,7 @@ function Form() {
               htmlFor="checklist-before-filling"
               className="text-sm text-gray-700 pl-2"
             >
-              5 minutos de tu tiempo
+              10 minutos de tu tiempo
             </label>
           </div>
           <div className="flex flex-column p-1 md:mx-10">
@@ -646,7 +643,7 @@ function Form() {
             Comencémos con la venta de tus muebles
           </h1>
           <p className="text-sm pt-2 ">
-            Por favor, llena la siguiente información, solo son siete pasos, no te tomará más de 5 min. Las secciones con * son requeridas
+            Por favor, llena la siguiente información, solo son siete pasos, no te tomará más de 10 min. Las secciones con * son requeridas
             
           </p>
         </div>

@@ -83,6 +83,19 @@ function CardProduct({ onProductChange }) {
                 Mesa
               </label>
             </div>
+            <div
+              className={`flex flex-col rounded-md m-1 w-70 h-50 border ${
+                product === "Otro" ? "border-orange-300" : ""
+              }`}
+              onClick={() => handleProductSelect("Otro")}
+            >
+              <label
+              className="text-gray-700 p-2 text-center hover:cursor-pointer"
+              htmlFor="Product"
+            >
+              Otro (Especificar en Descripción)
+            </label>
+          </div>
           </>
         );
       case "Recámara":
@@ -192,6 +205,19 @@ function CardProduct({ onProductChange }) {
                 Armario
               </label>
             </div>
+            <div
+              className={`flex flex-col rounded-md m-1 w-70 h-50 border ${
+                product === "Otro" ? "border-orange-300" : ""
+              }`}
+              onClick={() => handleProductSelect("Otro")}
+            >
+              <label
+              className="text-gray-700 p-2 text-center hover:cursor-pointer"
+              htmlFor="Product"
+            >
+              Otro (Especificar en Descripción)
+            </label>
+          </div>
           </>
         );
       case "Comedor":
@@ -236,6 +262,19 @@ function CardProduct({ onProductChange }) {
                 Mesa de comedor
               </label>
             </div>
+            <div
+              className={`flex flex-col rounded-md m-1 w-70 h-50 border ${
+                product === "Otro" ? "border-orange-300" : ""
+              }`}
+              onClick={() => handleProductSelect("Otro")}
+            >
+              <label
+              className="text-gray-700 p-2 text-center hover:cursor-pointer"
+              htmlFor="Product"
+            >
+              Otro (Especificar en Descripción)
+            </label>
+          </div>
           </>
         );
       case "Sala":
@@ -345,6 +384,19 @@ function CardProduct({ onProductChange }) {
                 Barra
               </label>
             </div>
+            <div
+              className={`flex flex-col rounded-md m-1 w-70 h-50 border ${
+                product === "Otro" ? "border-orange-300" : ""
+              }`}
+              onClick={() => handleProductSelect("Otro")}
+            >
+              <label
+              className="text-gray-700 p-2 text-center hover:cursor-pointer"
+              htmlFor="Product"
+            >
+              Otro (Especificar en Descripción)
+            </label>
+          </div>
           </>
         );
       case "Jardín y Terraza":
@@ -389,6 +441,19 @@ function CardProduct({ onProductChange }) {
                 Sombrilla
               </label>
             </div>
+            <div
+              className={`flex flex-col rounded-md m-1 w-70 h-50 border ${
+                product === "Otro" ? "border-orange-300" : ""
+              }`}
+              onClick={() => handleProductSelect("Otro")}
+            >
+              <label
+              className="text-gray-700 p-2 text-center hover:cursor-pointer"
+              htmlFor="Product"
+            >
+              Otro (Especificar en Descripción)
+            </label>
+          </div>
           </>
         );
       case "Oficina":
@@ -446,6 +511,19 @@ function CardProduct({ onProductChange }) {
                 Librero
               </label>
             </div>
+            <div
+              className={`flex flex-col rounded-md m-1 w-70 h-50 border ${
+                product === "Otro" ? "border-orange-300" : ""
+              }`}
+              onClick={() => handleProductSelect("Otro")}
+            >
+              <label
+              className="text-gray-700 p-2 text-center hover:cursor-pointer"
+              htmlFor="Product"
+            >
+              Otro (Especificar en Descripción)
+            </label>
+          </div>  
           </>
         );
       case "Almacenamiento":
@@ -568,6 +646,19 @@ function CardProduct({ onProductChange }) {
                 Vitrina
               </label>
             </div>
+            <div
+              className={`flex flex-col rounded-md m-1 w-70 h-50 border ${
+                product === "Otro" ? "border-orange-300" : ""
+              }`}
+              onClick={() => handleProductSelect("Otro")}
+            >
+              <label
+              className="text-gray-700 p-2 text-center hover:cursor-pointer"
+              htmlFor="Product"
+            >
+              Otro (Especificar en Descripción)
+            </label>
+          </div>
           </>
         );
       case "Sala de T.V.":
@@ -651,6 +742,19 @@ function CardProduct({ onProductChange }) {
                 Mueble modular
               </label>
             </div>
+            <div
+              className={`flex flex-col rounded-md m-1 w-70 h-50 border ${
+                product === "Otro" ? "border-orange-300" : ""
+              }`}
+              onClick={() => handleProductSelect("Otro")}
+            >
+              <label
+              className="text-gray-700 p-2 text-center hover:cursor-pointer"
+              htmlFor="Product"
+            >
+              Otro (Especificar en Descripción)
+            </label>
+          </div>
           </>
         );
       case "Entretenimiento":
@@ -708,6 +812,19 @@ function CardProduct({ onProductChange }) {
                 Mesa de juego
               </label>
             </div>
+            <div
+              className={`flex flex-col rounded-md m-1 w-70 h-50 border ${
+                product === "Otro" ? "border-orange-300" : ""
+              }`}
+              onClick={() => handleProductSelect("Otro")}
+            >
+              <label
+              className="text-gray-700 p-2 text-center hover:cursor-pointer"
+              htmlFor="Product"
+            >
+              Otro (Especificar en Descripción)
+            </label>
+          </div>
           </>
         );
       case "Decoración":
@@ -765,6 +882,19 @@ function CardProduct({ onProductChange }) {
                 Espejo
               </label>
             </div>
+            <div
+              className={`flex flex-col rounded-md m-1 w-70 h-50 border ${
+                product === "Otro" ? "border-orange-300" : ""
+              }`}
+              onClick={() => handleProductSelect("Otro")}
+            >
+              <label
+              className="text-gray-700 p-2 text-center hover:cursor-pointer"
+              htmlFor="Product"
+            >
+              Otro (Especificar en Descripción)
+            </label>
+          </div>
           </>
         );
       case "Bebés y niños":
@@ -835,6 +965,19 @@ function CardProduct({ onProductChange }) {
                 Cambiador
               </label>
             </div>
+            <div
+              className={`flex flex-col rounded-md m-1 w-70 h-50 border ${
+                product === "Otro" ? "border-orange-300" : ""
+              }`}
+              onClick={() => handleProductSelect("Otro")}
+            >
+              <label
+              className="text-gray-700 p-2 text-center hover:cursor-pointer"
+              htmlFor="Product"
+            >
+              Otro (Especificar en Descripción)
+            </label>
+          </div>
           </>
         )
       case "Línea blanca y Electrónicos":
@@ -892,6 +1035,19 @@ function CardProduct({ onProductChange }) {
                 Televisión
               </label>
             </div>
+            <div
+              className={`flex flex-col rounded-md m-1 w-70 h-50 border ${
+                product === "Otro" ? "border-orange-300" : ""
+              }`}
+              onClick={() => handleProductSelect("Otro")}
+            >
+              <label
+              className="text-gray-700 p-2 text-center hover:cursor-pointer"
+              htmlFor="Product"
+            >
+              Otro (Especificar en Descripción)
+            </label>
+          </div>
           </>
         )
       }
