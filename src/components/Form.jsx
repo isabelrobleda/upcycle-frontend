@@ -244,7 +244,8 @@ function Form() {
   const handleImageChange = (selectedImages) => {
     const maxFileSize = 20 * 1024 * 1024; // 2MB in bytes
     const validImages = selectedImages.filter(
-      (image) => image.size <= maxFileSize
+      (image) => image.size <= maxFileSize 
+      
     );
     
     setUploadImages(validImages);

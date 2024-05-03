@@ -26,8 +26,8 @@ function Images() {
     const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "video/mp4", "video/mov"];
     const maxSize = 20 * 1024 * 1024;
 
-    if (selectedFiles.length > 5) {
-      setError("No puedes subir más de 5 archivos.");
+    if (selectedFiles.length > 10) {
+      setError("No puedes subir más de 10 archivos.");
       return;
     }
 
@@ -163,8 +163,8 @@ que es un video reciente.</p>
               <br />
             </label>
           </div>
-          <p className="text-xs leading-5 text-grey-700 text-left ml-2 mt-1 text-red-600">
-           PNG, JPG, MOV y MP4. Hasta 20MB por archivo y hasta 5 archivos.
+          <p className="text-xs leading-5 text-grey-700 text-left ml-2 mt-1 font-semibold">
+           PNG, JPG, MOV y MP4. Hasta 20MB por archivo y hasta 10 archivos.
           </p>
           {error && <p className="text-red-600 text-sm text-left font-semibold ml-2">{error}</p>}
         </div>
