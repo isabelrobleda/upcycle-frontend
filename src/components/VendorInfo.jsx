@@ -110,6 +110,7 @@ function VendorInfo({
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:max-w-xs sm:text-sm sm:leading-6"
               onChange={handleCityChange}
               value={city}
+              required={true}
             >
               <option value="" disabled hidden >Selecciona</option>
               <option>CDMX</option>
@@ -187,7 +188,7 @@ function VendorInfo({
           </label>
           <div className="mt-2">
             <input
-              type="text"
+              type="number"
               name="postal-code"
               id="postal-code"
               autoComplete="postal-code"
