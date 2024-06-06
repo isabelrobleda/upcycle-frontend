@@ -400,55 +400,8 @@ function ProductOverview({
           </select>
         </div>
       </div>
-      <div className="sm:col-span-3">
-        <label
-          htmlFor="material"
-          className="block text-sm font-medium leading-6 text-gray-700 text-left"
-        >
-          Material *
-        </label>
-        <div className="mt-2">
-          <select
-            id="material"
-            name="material"
-            autoComplete="material-name"
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:max-w-xs sm:text-sm sm:leading-6"
-            value={materialSelected}
-            onChange={handleMaterialSelect}
-            required={true}
-          >
-            <option value="" disabled hidden>
-              Selecciona
-            </option>
-            <option>Madera</option>
-            <option>Metal</option>
-            <option>Plástico</option>
-            <option>Mármol</option>
-            <option>Piedra</option>
-            <option>Piel</option>
-            <option>Tela</option>
-            <option>Vidrio</option>
-            <option>Otro</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <label
-          htmlFor="Material More Info"
-          className="block text-sm font-medium leading-6 text-gray-900  mt-2 text-left mr-2"
-        >
-          Si sabes, más especificación sobre el material
-        </label>
-        <input
-          type="text"
-          id="material-more-info"
-          name="material-more-info"
-          placeholder="Caoba, Pino, Aluminio"
-          className="block md:w-1/4 pl-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
-          value={materialMoreInfo}
-          onChange={handleMaterialMoreInfoChange}
-        />
-      </div>
+      
+      
       <div className="border my-8 py-7 px-7 rounded-md border-dotted">
         <h3 className="text-lg font-bold text-gray-700 text-left">
           Precio aproximado de venta
