@@ -793,9 +793,10 @@ function Form() {
             Regresar a Upcycle
           </button>
         </Link>
-        <Link to="https://upcyclemyhome.com/">
+        <Link to="#">
           <button
-            className="border border-slate-400 text-slate-400 py-2 px-10 rounded-md text-sm hover:border-orange-400 hover:text-white hover:bg-orange-400"
+            className="border border-slate-400 mt-2 text-slate-400 py-2 px-10 rounded-md text-sm hover:border-orange-300 hover:text-white hover:bg-orange-300"
+            onClick={() => window.location.reload()}
           >
             Agregar otro producto
           </button>
