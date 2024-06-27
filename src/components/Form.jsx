@@ -262,7 +262,7 @@ function Form() {
       ...formData,
       PaymentInformation: { ...formData.PaymentInformation, name },
     });
-    setPaymentInfoCompleted(true);
+    
   };
 
   const handlePhoneChange = (phone) => {
@@ -360,6 +360,7 @@ function Form() {
       },
     });
     setSectionStatus({ ...sectionStatus, PaymentInfo: true });
+    setPaymentInfoCompleted(true);
   };
 
   const handleFloorsChange = (floors) => {
@@ -370,6 +371,7 @@ function Form() {
         floors,
       },
     });
+    
   };
 
   const upload = async (formData, files) => {
@@ -686,7 +688,7 @@ function Form() {
               >
                 {isLoading ? "Cargando..." : "Guardar y enviar"}
               </button>
-            )}
+            )} 
           </div>
         </div>
 
