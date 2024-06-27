@@ -587,7 +587,7 @@ function Form() {
             Comencémos con la venta de tus muebles
           </h1>
           <p className="text-sm pt-2 ">
-            Por favor, llena la siguiente información, solo son siete pasos, no te tomará más de 10 min. Las secciones con * son requeridas
+            Por favor, llena la siguiente información, solo son seis pasos, no te tomará más de 10 min. Las secciones con * son requeridas
             
           </p>
         </div>

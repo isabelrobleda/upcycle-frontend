@@ -28,9 +28,9 @@ function PaymentInfo({
   };
 
   return (
-    <div className="sm:col-span-2">
+    <div className="sm:col-span-2 md:mx-36 mt-16">
       <h2 className="font-bold text-xl text-gray-700 text-left mt-16 mb-2">
-        7. Datos de contacto para agendar el pickup de tu mueble y aclarar
+        6. Datos de contacto para agendar el pickup de tu mueble y aclarar
         dudas.
       </h2>
 
