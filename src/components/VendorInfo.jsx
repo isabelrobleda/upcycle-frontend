@@ -116,11 +116,7 @@ function VendorInfo({
       region,
       colony,
       map,
-      elevator,
-      floorsElevator,
-      seVuela,
-      floors,
-      dismantle,
+      
     };
     localStorage.setItem("vendorInfo", JSON.stringify(dataToSave));
   }, [
@@ -130,11 +126,7 @@ function VendorInfo({
     region,
     colony,
     map,
-    elevator,
-    floorsElevator,
-    seVuela,
-    floors,
-    dismantle,
+   
   ]);
 
   return (

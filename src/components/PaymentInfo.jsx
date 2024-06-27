@@ -1,37 +1,51 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function PaymentInfo({
-  onNameChange,
-  onPhoneChange,
-  onFullNameChange,
-  urgency,
-}) {
+function PaymentInfo({ onNameChange, onPhoneChange, onFullNameChange, urgency }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState(false);
   const [fullName, setFullName] = useState("");
 
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("paymentInfo"));
+    if (savedData) {
+      setName(savedData.name || "");
+      setPhone(savedData.phone || "");
+      setFullName(savedData.fullName || "");
+    }
+  }, []);
+
   const handleNameChange = (e) => {
-    setName(e.target.value);
-    onNameChange(e.target.value);
+    const value = e.target.value;
+    setName(value);
+    onNameChange(value);
   };
 
   const handlePhoneChange = (e) => {
-    setPhone(e.target.value);
-    onPhoneChange(e.target.value);
+    const value = e.target.value;
+    setPhone(value);
+    onPhoneChange(value);
   };
 
   const handleFullNameChange = (e) => {
-    setFullName(e.target.value);
-    onFullNameChange(e.target.value);
+    const value = e.target.value;
+    setFullName(value);
+    onFullNameChange(value);
   };
+
+  useEffect(() => {
+    const dataToSave = {
+      name,
+      phone,
+      fullName,
+    };
+    localStorage.setItem("paymentInfo", JSON.stringify(dataToSave));
+  }, [name, phone, fullName]);
 
   return (
     <div className="sm:col-span-2 md:mx-36 mt-16">
       <h2 className="font-bold text-xl text-gray-700 text-left mt-16 mb-2">
-        6. Datos de contacto para agendar el pickup de tu mueble y aclarar
-        dudas.
+        6. Datos de contacto para agendar el pickup de tu mueble y aclarar dudas.
       </h2>
 
       <label
