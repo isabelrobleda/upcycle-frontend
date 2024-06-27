@@ -793,6 +793,13 @@ function Form() {
             Regresar a Upcycle
           </button>
         </Link>
+        <Link to="https://upcyclemyhome.com/">
+          <button
+            className="border border-slate-400 text-slate-400 py-2 px-10 rounded-md text-sm hover:border-orange-400 hover:text-white hover:bg-orange-400"
+          >
+            Agregar otro producto
+          </button>
+        </Link>
         
       </Modal>
     </>
