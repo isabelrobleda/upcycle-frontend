@@ -727,7 +727,7 @@ function Form() {
             <p>Ancho: {formData.ProductInformation.width}</p>
             <p>Profundidad: {formData.ProductInformation.depth}</p>
             <p>Peso: {formData.ProductInformation.weight}</p>
-            <p>Material: {formData.ProductInformation.material}</p>
+           
 
             <h3 className="text-md font-semibold mt-4">
               Información de Pick-Up:
@@ -739,21 +739,11 @@ function Form() {
             <p>Colonia: {formData.VendorInformation.colony}</p>
 
             <h3 className="text-md font-semibold mt-4">
-              Datos bancarios y personales
+              Datos personales
             </h3>
-            <p>
-              Nombre del Titular: {formData.PaymentInformation.nameOfHolder}
-            </p>
-            <p>CLABE: {formData.PaymentInformation.bankDetails}</p>
-            <p>Nombre del Banco: {formData.PaymentInformation.nameOfBank}</p>
-            <p>Número de cuenta: {formData.PaymentInformation.accountNumber}</p>
             <p>Teléfono: {formData.PaymentInformation.phone}</p>
             <p>Email: {formData.PaymentInformation.name}</p>
             <p>Nombre completo: {formData.PaymentInformation.fullName}</p>
-            <p>Nacionalidad: {formData.PaymentInformation.nationality}</p>
-            <p>Fecha de nacimiento: {formData.PaymentInformation.birthDate}</p>
-            <p>Género: {formData.PaymentInformation.gender}</p>
-            <p>Razón de venta: {formData.PaymentInformation.reasonOfSale}</p>
 
             <button
               className="mt-4 border border-gray-400 text-gray-400 py-2 px-4 rounded-md text-sm hover:border-gray-600 hover:text-white hover:bg-gray-600"
