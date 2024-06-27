@@ -59,11 +59,7 @@ function Form() {
       floors: "",
     },
     PaymentInformation: {
-      bankDetails: "",
       name: "",
-      nameOfHolder: "",
-      nameOfBank: "",
-      accountNumber: "",
       phone: "",
     },
   });
@@ -258,33 +254,8 @@ function Form() {
     });
   };
 
-  const handleBankDetailsChange = (bankDetails) => {
-    setFormData({
-      ...formData,
-      PaymentInformation: { ...formData.PaymentInformation, bankDetails },
-    });
-  };
+  
 
-  const handleNameOfBankChange = (nameOfBank) => {
-    setFormData({
-      ...formData,
-      PaymentInformation: { ...formData.PaymentInformation, nameOfBank },
-    });
-  };
-
-  const handleAccountNumberChange = (accountNumber) => {
-    setFormData({
-      ...formData,
-      PaymentInformation: { ...formData.PaymentInformation, accountNumber },
-    });
-  };
-
-  const handleNameOfHolderChange = (nameOfHolder) => {
-    setFormData({
-      ...formData,
-      PaymentInformation: { ...formData.PaymentInformation, nameOfHolder },
-    });
-  };
 
   const handleNameChange = (name) => {
     setFormData({
@@ -307,35 +278,6 @@ function Form() {
       PaymentInformation: { ...formData.PaymentInformation, fullName },
     });
   }
-
-  const handleNationalityChange = (nationality) => {
-    setFormData({
-      ...formData,
-      PaymentInformation: { ...formData.PaymentInformation, nationality },
-  })
-  }
-
-  const handleBirthDateChange = (birthDate) => {
-    setFormData({
-      ...formData,
-      PaymentInformation: { ...formData.PaymentInformation, birthDate },
-  })
-  }
-
-  const handleGenderChange = (gender) => {
-    setFormData({
-      ...formData,
-      PaymentInformation: { ...formData.PaymentInformation, gender },
-  })
-  }
-
-  const handleReasonOfSaleChange = (reasonOfSale) => {
-    setFormData({
-      ...formData,
-      PaymentInformation: { ...formData.PaymentInformation, reasonOfSale },
-  })
-  }
-
 
   const handleCityChange = (city) => {
     setFormData({
@@ -714,17 +656,9 @@ function Form() {
           {sectionStatus.PaymentInfo && (
             <PaymentInfo
               onDeliveryAdoptionChange={handleDeliveryAdoptionChange}
-              onBankDetailsChange={handleBankDetailsChange}
               onNameChange={handleNameChange}
-              onNameHolderChange={handleNameOfHolderChange}
-              onNameBankChange={handleNameOfBankChange}
-              onAccountNumberChange={handleAccountNumberChange}
               onPhoneChange={handlePhoneChange}
               onFullNameChange={handleFullNameChange}
-              onNationalityChange={handleNationalityChange}
-              onBirthDateChange={handleBirthDateChange}
-              onGenderChange={handleGenderChange}
-              onReasonOfSaleChange={handleReasonOfSaleChange}
               urgency={urgency}
             />
           )}
@@ -860,14 +794,13 @@ function Form() {
           Muchas gracias por tu tiempo
         </p>
         <p className="text-sm text-gray-700 pb-2">
-          Por favor da click en el siguiente botón para iniciar sesión con
-          nosotros
+          Por favor da click en el siguiente botón para regresar a home
         </p>
-        <Link to="https://upcyclemex.com/account/login">
+        <Link to="https://upcyclemex.com/">
           <button
             className="border border-slate-400 text-slate-400 py-2 px-10 rounded-md text-sm hover:border-orange-400 hover:text-white hover:bg-orange-400"
           >
-            Iniciar Sesión
+            Regresar a Upcycle
           </button>
         </Link>
         
