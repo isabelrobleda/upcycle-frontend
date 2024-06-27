@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function VendorInfo({
   onCityChange,
@@ -21,69 +20,122 @@ function VendorInfo({
   const [colony, setColony] = useState("");
   const [map, setMap] = useState("");
   const [elevator, setElevator] = useState(null);
-  const [floorsElevator, setNoElevatorFloors] = useState("")
+  const [floorsElevator, setNoElevatorFloors] = useState("");
   const [seVuela, setSeVuela] = useState(null);
   const [floors, setFloors] = useState("");
   const [dismantle, setDismantle] = useState(null);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("vendorInfo"));
+    if (savedData) {
+      setCity(savedData.city || "");
+      setPostalCode(savedData.postalCode || "");
+      setAddress(savedData.address || "");
+      setRegion(savedData.region || "");
+      setColony(savedData.colony || "");
+      setMap(savedData.map || "");
+      setElevator(savedData.elevator || null);
+      setNoElevatorFloors(savedData.floorsElevator || "");
+      setSeVuela(savedData.seVuela || null);
+      setFloors(savedData.floors || "");
+    }
+  }, []);
+
   const handleCityChange = (e) => {
-    setCity(e.target.value);
-    onCityChange(e.target.value);
+    const value = e.target.value;
+    setCity(value);
+    onCityChange(value);
   };
 
   const handlePostalCodeChange = (e) => {
-    setPostalCode(e.target.value);
-    onPostalCodeChange(e.target.value);
+    const value = e.target.value;
+    setPostalCode(value);
+    onPostalCodeChange(value);
   };
 
   const handleAddressChange = (e) => {
-    setAddress(e.target.value);
-    onAddressChange(e.target.value);
+    const value = e.target.value;
+    setAddress(value);
+    onAddressChange(value);
   };
 
   const handleRegionChange = (e) => {
-    setRegion(e.target.value);
-    onRegionChange(e.target.value);
+    const value = e.target.value;
+    setRegion(value);
+    onRegionChange(value);
   };
 
   const handleColonyChange = (e) => {
-    setColony(e.target.value);
-    onColonyChange(e.target.value);
+    const value = e.target.value;
+    setColony(value);
+    onColonyChange(value);
   };
 
   const handleMapChange = (e) => {
-    setMap(e.target.value);
-    onMapChange(e.target.value);
+    const value = e.target.value;
+    setMap(value);
+    onMapChange(value);
   };
 
   const handleElevatorChange = (e) => {
-    const checked = e.target.value === 'true'
+    const checked = e.target.value === "true";
     setElevator(checked);
     onElevatorChange(checked);
   };
 
   const handleDismantleChange = (e) => {
-    const checked = e.target.value === 'true'
+    const checked = e.target.value === "true";
     setDismantle(checked);
     onDismantleChange(checked);
-  }
+  };
 
   const handleSeVuelaChange = (e) => {
-    const checked = e.target.value === 'true'
+    const checked = e.target.value === "true";
     setSeVuela(checked);
     onSeVuelaChange(checked);
   };
 
   const handleNoElevatorFloorsChange = (e) => {
-    setNoElevatorFloors(e.target.value);
-    onNoElevatorFloorsChange(e.target.value);
-  }
+    const value = e.target.value;
+    setNoElevatorFloors(value);
+    onNoElevatorFloorsChange(value);
+  };
 
   const handleFloorsChange = (e) => {
-    setFloors(e.target.value);
-    onFloorsChange(e.target.value);
-  }
+    const value = e.target.value;
+    setFloors(value);
+    onFloorsChange(value);
+  };
+
+  useEffect(() => {
+    const dataToSave = {
+      city,
+      postalCode,
+      address,
+      region,
+      colony,
+      map,
+      elevator,
+      floorsElevator,
+      seVuela,
+      floors,
+      dismantle,
+    };
+    localStorage.setItem("vendorInfo", JSON.stringify(dataToSave));
+  }, [
+    city,
+    postalCode,
+    address,
+    region,
+    colony,
+    map,
+    elevator,
+    floorsElevator,
+    seVuela,
+    floors,
+    dismantle,
+  ]);
 
   return (
     <div className="md:mx-36 mt-16">
@@ -91,7 +143,10 @@ function VendorInfo({
         5. Información de Pickup
       </h2>
       <p className="mt-1 text-sm leading-6 text-gray-700 text-left">
-      Danos todos los detalles sobre el lugar de recolección para el equipo de logística. Esta información es vital para saber que está cubierto por el servicio de envío estandar y no habrá costos adicionales para el vendedor.
+        Danos todos los detalles sobre el lugar de recolección para el equipo de
+        logística. Esta información es vital para saber que está cubierto por el
+        servicio de envío estandar y no habrá costos adicionales para el
+        vendedor.
       </p>
 
       <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -99,7 +154,6 @@ function VendorInfo({
           <label
             htmlFor="city"
             className="block text-sm font-medium leading-6 text-gray-700 text-left"
-
           >
             Estado *
           </label>
@@ -112,7 +166,9 @@ function VendorInfo({
               value={city}
               required={true}
             >
-              <option value="" disabled hidden >Selecciona</option>
+              <option value="" disabled hidden>
+                Selecciona
+              </option>
               <option>CDMX</option>
               <option>Edo. Mex</option>
             </select>
@@ -134,6 +190,7 @@ function VendorInfo({
               autoComplete="street-address"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
               onChange={handleAddressChange}
+              value={address}
               required={true}
             />
           </div>
@@ -154,6 +211,7 @@ function VendorInfo({
               autoComplete="address-level2"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
               onChange={handleColonyChange}
+              value={colony}
               required={true}
             />
           </div>
@@ -174,6 +232,7 @@ function VendorInfo({
               autoComplete="address-level1"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
               onChange={handleRegionChange}
+              value={region}
               required={true}
             />
           </div>
@@ -194,6 +253,7 @@ function VendorInfo({
               autoComplete="postal-code"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
               onChange={handlePostalCodeChange}
+              value={postalCode}
               required={true}
             />
           </div>
@@ -212,6 +272,7 @@ function VendorInfo({
             autoComplete="off"
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-300 sm:text-sm sm:leading-6"
             onChange={handleMapChange}
+            value={map}
           />
         </div>
       </div>
@@ -229,7 +290,7 @@ function VendorInfo({
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
               onChange={handleElevatorChange}
               value={true}
-              checked={elevator === true} 
+              checked={elevator === true}
               required={true}
             />
             <label
@@ -247,7 +308,7 @@ function VendorInfo({
               className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-orange-300"
               onChange={handleElevatorChange}
               value={false}
-              checked={elevator === false} 
+              checked={elevator === false}
               required={true}
             />
             <label
@@ -269,11 +330,12 @@ function VendorInfo({
           id="number-floors"
           className="h-7 w-12 border rounded-md border-gray-300 text-gray text-sm text-center focus:ring-orange-300"
           onChange={handleNoElevatorFloorsChange}
+          value={floorsElevator}
         />
       </div>
       <fieldset className="mt-3">
         <legend className="text-sm font-semibold leading-6 text-gray-700 text-left">
-        ¿Hay que desarmar el mueble para sacarlo de tu casa? *
+          ¿Hay que desarmar el mueble para sacarlo de tu casa? *
         </legend>
 
         <div className="mt-6 space-y-6">
@@ -369,6 +431,7 @@ function VendorInfo({
           id="number-floors-special-pickup"
           className="h-7 w-12 border rounded-md border-gray-300 text-gray text-sm text-center focus:ring-orange-300"
           onChange={handleFloorsChange}
+          value={floors}
         />
       </div>
     </div>
