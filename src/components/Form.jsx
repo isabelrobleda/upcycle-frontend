@@ -59,8 +59,10 @@ function Form() {
       floors: "",
     },
     PaymentInformation: {
+      deliveryAdoption: "",
       name: "",
       phone: "",
+      fullName: "",
     },
   });
 
@@ -373,6 +375,8 @@ function Form() {
     });
     
   };
+
+  
 
   const upload = async (formData, files) => {
     const formDataToSend = new FormData();
