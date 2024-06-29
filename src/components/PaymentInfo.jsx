@@ -6,15 +6,6 @@ function PaymentInfo({ onNameChange, onPhoneChange, onFullNameChange, urgency })
   const [error, setError] = useState(false);
   const [fullName, setFullName] = useState("");
 
-  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("paymentInfo"));
-    if (savedData) {
-      setName(savedData.name || "");
-      setPhone(savedData.phone || "");
-      setFullName(savedData.fullName || "");
-    }
-  }, []);
-
   const handleNameChange = (e) => {
     const value = e.target.value;
     setName(value);
@@ -32,15 +23,6 @@ function PaymentInfo({ onNameChange, onPhoneChange, onFullNameChange, urgency })
     setFullName(value);
     onFullNameChange(value);
   };
-
-  useEffect(() => {
-    const dataToSave = {
-      name,
-      phone,
-      fullName,
-    };
-    localStorage.setItem("paymentInfo", JSON.stringify(dataToSave));
-  }, [name, phone, fullName]);
 
   return (
     <div className="sm:col-span-2 md:mx-36 mt-16">

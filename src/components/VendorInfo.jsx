@@ -26,22 +26,6 @@ function VendorInfo({
   const [dismantle, setDismantle] = useState(null);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("vendorInfo"));
-    if (savedData) {
-      setCity(savedData.city || "");
-      setPostalCode(savedData.postalCode || "");
-      setAddress(savedData.address || "");
-      setRegion(savedData.region || "");
-      setColony(savedData.colony || "");
-      setMap(savedData.map || "");
-      setElevator(savedData.elevator || null);
-      setNoElevatorFloors(savedData.floorsElevator || "");
-      setSeVuela(savedData.seVuela || null);
-      setFloors(savedData.floors || "");
-    }
-  }, []);
-
   const handleCityChange = (e) => {
     const value = e.target.value;
     setCity(value);
@@ -107,27 +91,6 @@ function VendorInfo({
     setFloors(value);
     onFloorsChange(value);
   };
-
-  useEffect(() => {
-    const dataToSave = {
-      city,
-      postalCode,
-      address,
-      region,
-      colony,
-      map,
-      
-    };
-    localStorage.setItem("vendorInfo", JSON.stringify(dataToSave));
-  }, [
-    city,
-    postalCode,
-    address,
-    region,
-    colony,
-    map,
-   
-  ]);
 
   return (
     <div className="md:mx-36 mt-16">
