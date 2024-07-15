@@ -380,12 +380,12 @@ function Form() {
 
   const upload = async (formData, files) => {
     const formDataToSend = new FormData();
-
+  
     // Append urgency and foundation to donate fields
     for (const key in formData.FirstForm) {
       formDataToSend.append(`FirstForm[${key}]`, formData.FirstForm[key]);
     }
-
+  
     // Append product information
     for (const key in formData.ProductInformation) {
       formDataToSend.append(
@@ -393,7 +393,7 @@ function Form() {
         formData.ProductInformation[key]
       );
     }
-
+  
     // Append vendor information
     for (const key in formData.VendorInformation) {
       formDataToSend.append(
@@ -401,7 +401,7 @@ function Form() {
         formData.VendorInformation[key]
       );
     }
-
+  
     // Append payment information
     for (const key in formData.PaymentInformation) {
       formDataToSend.append(
@@ -409,18 +409,18 @@ function Form() {
         formData.PaymentInformation[key]
       );
     }
-
+  
     // Append images
     const imagesToSend = document.querySelector("#files").files;
     for (let i = 0; i < imagesToSend.length; i++) {
       formDataToSend.append("UploadImages", imagesToSend[i]);
     }
-
+  
     // Log the form data and files to check if they are correct
-  for (let pair of formDataToSend.entries()) {
-    console.log(pair[0]+ ', ' + pair[1]); 
-  }
-
+    for (let pair of formDataToSend.entries()) {
+      console.log(pair[0] + ', ' + pair[1]); 
+    }
+  
     try {
       const response = await axios.post(
         `${API_URL}/api/vendor-form`,
