@@ -416,11 +416,6 @@ function Form() {
       formDataToSend.append("UploadImages", imagesToSend[i]);
     }
   
-    // Log the form data and files to check if they are correct
-    for (let pair of formDataToSend.entries()) {
-      console.log(pair[0] + ', ' + pair[1]); 
-    }
-  
     try {
       const response = await axios.post(
         `${API_URL}/api/vendor-form`,
