@@ -135,7 +135,7 @@ function VendorInfo({
             htmlFor="street-address"
             className="block text-sm font-medium leading-6 text-gray-700 text-left"
           >
-            Calle *
+            Calle y número *
           </label>
           <div className="mt-2">
             <input
