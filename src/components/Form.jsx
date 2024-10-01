@@ -75,6 +75,7 @@ function Form() {
   const [isLoading, setIsLoading] = useState(false); 
 
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true); 
@@ -248,6 +249,8 @@ function Form() {
     
     setUploadImages(validImages);
   };
+
+
 
   const handleDeliveryAdoptionChange = (deliveryAdoption) => {
     setFormData({
@@ -617,6 +620,7 @@ function Form() {
             <Description
               onDescriptionChange={handleDescriptionChange}
               onStateOfProductChange={handleStateOfProductChange}
+              
             />
           )}
         </div>
@@ -631,6 +635,8 @@ function Form() {
               onWidthChange={handleWidthChange}
               onDepthChange={handleDepthChange}
               onWeightChange={handleWeightChange}
+              usage={formData.ProductInformation.usage}  
+              stateOfProduct={formData.ProductInformation.stateOfProduct}
               onPriceInputChange={handlePriceInputChange}
               onDesiredSellingPriceChange={handleDesiredSellingPriceChange}
               onApproxSellingPrice={handleApproxSellingPriceChange}

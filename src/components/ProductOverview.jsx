@@ -17,6 +17,8 @@ function ProductOverview({
   onDesiredSellingPriceChange,
   onApproxSellingPrice,
   urgency,
+  stateOfProduct,
+  usage,
 }) {
   const [selected, setSelected] = useState([""]);
   const [useSelected, setUseSelected] = useState([""]);
@@ -145,10 +147,9 @@ function ProductOverview({
 
   const handlePriceInputChange = (e) => {
     const inputValue = e.target.value;
-    setPriceInput(inputValue); // Always update the input to reflect user typing
+    setPriceInput(inputValue);
     onPriceInputChange(inputValue);
-
-    validateInput(inputValue, weight);
+    validateInput(inputValue, stateOfProduct);
   };
 
   const validateInput = (inputValue, weight) => {
@@ -217,11 +218,29 @@ function ProductOverview({
 
   const calculateApproxSellingPrice = () => {
     if (!priceError && priceInput) {
-      let discountPercentage = urgency === "discount" ? 0.6 : 0.7;
+      let discountPercentage = 1;
+      if (stateOfProduct === "perfecto") {
+        if (usage === "Nuevo - sigue en su empaque") discountPercentage = 0.87;
+        if (usage === "Menos de 1 año") discountPercentage = 0.85;
+        if (usage === "1-3 años") discountPercentage = 0.8;
+        if (usage === "3-6 años") discountPercentage = 0.65;
+        if (usage === "Más de 6 años") discountPercentage = 0.55;
+        if (usage === "Vintage") discountPercentage = 0.7;
+      } else if (stateOfProduct === "golpeadon") {
+        if (usage === "Nuevo - sigue en su empaque") discountPercentage = 0.7;
+        if (usage === "Menos de 1 año") discountPercentage = 0.6;
+        if (usage === "1-3 años") discountPercentage = 0.5;
+        if (usage === "3-6 años") discountPercentage = 0.4;
+        if (usage === "Más de 6 años") discountPercentage = 0.3;
+        if (usage === "Vintage") discountPercentage = 0.4;
+      } else if (stateOfProduct === "vivido") {
+        discountPercentage = 0.2; // Any state with "vivido" gets only 20%
+      }
+
       const newPrice = parseFloat(priceInput);
       let approxPrice = newPrice * discountPercentage;
       setApproxSellingPrice(approxPrice.toFixed(2));
-      onApproxSellingPrice(approxPrice.toFixed(2)); // Call this only if you need to propagate the value
+      onApproxSellingPrice(approxPrice.toFixed(2));
     } else {
       setApproxSellingPrice("");
     }
@@ -231,10 +250,11 @@ function ProductOverview({
     setAgreeWithPrice(event.target.value);
   };
 
-
   useEffect(() => {
+    console.log("Estado del producto:", stateOfProduct);
+    console.log("Uso:", usage);
     calculateApproxSellingPrice();
-  }, [priceInput, priceError, desiredPriceError]);
+  }, [priceInput, priceError, desiredPriceError, stateOfProduct, usage]);
 
   return (
     <div className="md:mx-36 mt-16">
@@ -400,24 +420,18 @@ function ProductOverview({
           </select>
         </div>
       </div>
-      
-      
+
       <div className="border my-8 py-7 px-7 rounded-md border-dotted">
         <h3 className="text-lg font-bold text-gray-700 text-left">
-          Precio aproximado de venta
+          Precio aproximado de venta [1]
         </h3>
-        <p className="text-gray-700 text-left text-sm pb-1">
-          El precio mínimo de venta al público (sin considerar el costo de
-          envío) es de MXN$1300 para accesorios de menos de 12 Kg (que puedas
-          cargar solo) y MXN$3500 para muebles de más de 12Kg (que necesiten 2 o
-          más personas para moverse).
-        </p>
+
         <p className="text-gray-700 text-left text-sm pb-5 font-semibold">
           Si vas a donar el producto, puedes saltar hasta "Subir tus archivos"
         </p>
         <div className="flex md:flex-row flex-col text-left text-sm justify-start text-gray-700 ">
           <label htmlFor="priceInput" className="pr-2">
-            A) Precio del producto si fuera <b>nuevo </b>hoy (en MXN) [1]:
+            A) Precio del producto si fuera <b>nuevo </b>hoy (en MXN) [2]:
           </label>
           <input
             type="text"
@@ -434,9 +448,9 @@ function ProductOverview({
 
         <div className="flex md:flex-row flex-col text-left text-sm justify-start pt-3">
           <label>
-            B) Precio que te <b>sugerimos</b> de venta (en MXN). A este precio
-            se añadirá el costo de envío estándar. Como vendedor, recibirás
-            aprox. el 70% de este precio. [2]:{" "}
+            B) Precio aprox. sugerido de venta (en MXN) tomando en cuenta
+            algunas características de tu producto. A este precio se añadirá el
+            costo de envío estándar [3] :{" "}
           </label>
           <input
             type="text"
@@ -450,25 +464,42 @@ function ProductOverview({
         </div>
         <div className="flex flex-col text-sm mt-3">
           <div className="flex flex-row">
-            <input type="radio" name="ok" id="ok-no" className=" mr-1" value="yes"
-                checked={agreeWithPrice === "yes"}
-                onChange={handleRadioChange}/>
+            <input
+              type="radio"
+              name="ok"
+              id="ok-no"
+              className=" mr-1"
+              value="yes"
+              checked={agreeWithPrice === "yes"}
+              onChange={handleRadioChange}
+            />
             <label htmlFor="">Estoy de acuerdo con el precio sugerido</label>
           </div>
           <div className="flex flex-row">
-            <input type="radio" name="ok" id="ok-yes" className="mr-1 " value="no"
-                checked={agreeWithPrice === "no"}
-                onChange={handleRadioChange} />
-            <label htmlFor="">No estoy de acuerdo con el precio sugerido</label>
+            <input
+              type="radio"
+              name="ok"
+              id="ok-yes"
+              className="mr-1 "
+              value="no"
+              checked={agreeWithPrice === "no"}
+              onChange={handleRadioChange}
+            />
+            <label htmlFor="">
+              No estoy de acuerdo con el precio sugerido [4]{" "}
+            </label>
           </div>
+
+          
         </div>
+        
 
         {agreeWithPrice === "no" && (
           <div className="flex md:flex-row flex-col text-sm text-left justify-start pt-3">
             <label htmlFor="desiredSellingPrice" className="pr-2">
-              C) Si no estás de acuerdo, ¿a qué precio <b>deseas</b> vender tu producto (en MXN)? A este precio se añadirá
-el costo de envío estándar. Como vendedor, recibirás
-aprox. el 70% de este precio. [3]:
+              Si no estás de acuerdo, ¿a qué precio <b>deseas</b> vender tu
+              producto (en MXN)? A este precio se añadirá el costo de envío
+              estándar. Como vendedor, recibirás aprox. el 70% de este precio.
             </label>
             <input
               type="text"
@@ -478,33 +509,55 @@ aprox. el 70% de este precio. [3]:
               placeholder={weight === "<12kg" ? "1858 " : "5000"}
               className="border-2 border-gray-300 rounded-md p-1 md:w-1/5 text-sm"
             />
-             
-              <p className="text-red-500 text-xs mt-2 md:pl-2">Este
-monto debe estar entre MXN$1,300 o MXN$3,500 y el
-precio sugerido en B) según el peso de tu producto.</p>
-            
+
+            <p className="text-red-500 text-xs mt-2 md:pl-2">
+              Este monto debe estar entre MXN$1,300 o MXN$3,500 y el precio
+              sugerido en B) según el peso de tu producto.
+            </p>
           </div>
         )}
 
+<div className="flex md:flex-row flex-col text-left text-sm justify-start pt-3">
+          <label>C) Ganancia aproximada del vendedor [5]: </label>
+          <input
+            type="text"
+            value={approxSellingPrice * 0.7}
+            readOnly
+            className="border-2 border-dotted border-gray-300 rounded-md p-1 md:w-1/4 text-sm"
+          />
+        </div>
+
         <div className="flex flex-row text-left pt-3">
           <p className="text-gray-700 text-xs pt-3">
-            [1] ¿Cuánto cuesta tu producto o uno muy similar hoy en la tienda
+            [1] El precio mínimo de venta al público (sin considerar el costo de
+            envío) es de MXN$1300 para accesorios de menos de 12 Kg (que puedas
+            cargar solo) y MXN$3500 para muebles de más de 12Kg (que necesiten 2
+            o más personas para moverse).
+          </p>
+        </div>
+        <div className="flex flex-row text-left pt-1">
+          <p className="text-gray-700 text-xs">
+            [2] ¿Cuánto cuesta tu producto o uno muy similar hoy en la tienda
             donde lo compraste o una muy similar?
           </p>
         </div>
         <div className="flex flex-row text-left pt-1">
           <p className="text-gray-700 text-xs">
-            [2] Éste es el precio en el que te sugerimos vender tu producto
-            tomando en cuenta algunas de las características que nos
-            proporcionaste. OJO: el mínimo es de MXN$1,300 y MXN$3,500 para
-            menores o mayores de 12 Kg respectivamente.
+            [3] Este precio es una sugerencia aproximada pero puede variar tras
+            la revisión del producto.
           </p>
         </div>
         <div className="flex flex-row text-left pt-1">
           <p className="text-gray-700 text-xs">
-            [3] “Para este precio toma en cuenta que el límite inferior es
-            MXN$1,300 o MXN$3,500, dependiendo de si tu producto pesa menos o
-            más de 12 Kg y el límite superior es el precio sugerido en B).”{" "}
+            [4] Si el precio que propones es superior que el sugerido en B),
+            estará sujeto a revisión y aprobación por Upcycle antes de publicar
+            tu producto en el catálogo.
+          </p>
+        </div>
+        <div className="flex flex-row text-left pt-1">
+          <p className="text-gray-700 text-xs">
+            [5] La ganancia aproximada del vendedor es el 70% del precio de
+            venta al público.
           </p>
         </div>
       </div>
