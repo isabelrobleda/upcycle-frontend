@@ -234,7 +234,7 @@ function ProductOverview({
         if (usage === "Más de 6 años") discountPercentage = 0.3;
         if (usage === "Vintage") discountPercentage = 0.4;
       } else if (stateOfProduct === "vivido") {
-        discountPercentage = 0.2; // Any state with "vivido" gets only 20%
+        discountPercentage = 0.2; // todos los "vivido" reciben el 20%
       }
 
       const newPrice = parseFloat(priceInput);
@@ -509,11 +509,6 @@ function ProductOverview({
               placeholder={weight === "<12kg" ? "1858 " : "5000"}
               className="border-2 border-gray-300 rounded-md p-1 md:w-1/5 text-sm"
             />
-
-            <p className="text-red-500 text-xs mt-2 md:pl-2">
-              Este monto debe estar entre MXN$1,300 o MXN$3,500 y el precio
-              sugerido en B) según el peso de tu producto.
-            </p>
           </div>
         )}
 
@@ -521,7 +516,7 @@ function ProductOverview({
           <label>C) Ganancia aproximada del vendedor [5]: </label>
           <input
             type="text"
-            value={approxSellingPrice * 0.7}
+            value={(approxSellingPrice * 0.7).toFixed(2)}
             readOnly
             className="border-2 border-dotted border-gray-300 rounded-md p-1 md:w-1/4 text-sm"
           />
