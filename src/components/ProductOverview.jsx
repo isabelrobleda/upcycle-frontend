@@ -220,21 +220,26 @@ function ProductOverview({
     if (!priceError && priceInput) {
       let discountPercentage = 1;
       if (stateOfProduct === "perfecto") {
-        if (usage === "Nuevo - sigue en su empaque") discountPercentage = 0.87;
-        if (usage === "Menos de 1 año") discountPercentage = 0.85;
-        if (usage === "1-3 años") discountPercentage = 0.8;
-        if (usage === "3-6 años") discountPercentage = 0.65;
-        if (usage === "Más de 6 años") discountPercentage = 0.55;
-        if (usage === "Vintage") discountPercentage = 0.7;
+        if (usage === "Nuevo - sigue en su empaque") discountPercentage = 0.72;
+        if (usage === "Menos de 1 año") discountPercentage = 0.70;
+        if (usage === "1-3 años") discountPercentage = 0.65;
+        if (usage === "3-6 años") discountPercentage = 0.5;
+        if (usage === "Más de 6 años") discountPercentage = 0.50;
+        if (usage === "Vintage") discountPercentage = 0.55;
       } else if (stateOfProduct === "golpeadon") {
-        if (usage === "Nuevo - sigue en su empaque") discountPercentage = 0.7;
-        if (usage === "Menos de 1 año") discountPercentage = 0.6;
+        if (usage === "Nuevo - sigue en su empaque") discountPercentage = 0.57;
+        if (usage === "Menos de 1 año") discountPercentage = 0.55;
         if (usage === "1-3 años") discountPercentage = 0.5;
-        if (usage === "3-6 años") discountPercentage = 0.4;
-        if (usage === "Más de 6 años") discountPercentage = 0.3;
+        if (usage === "3-6 años") discountPercentage = 0.35;
+        if (usage === "Más de 6 años") discountPercentage = 0.25;
         if (usage === "Vintage") discountPercentage = 0.4;
       } else if (stateOfProduct === "vivido") {
-        discountPercentage = 0.2; // todos los "vivido" reciben el 20%
+        if (usage === "Nuevo - sigue en su empaque") discountPercentage = 0.42;
+        if (usage === "Menos de 1 año") discountPercentage = 0.4;
+        if (usage === "1-3 años") discountPercentage = 0.35;
+        if (usage === "3-6 años") discountPercentage = 0.2;
+        if (usage === "Más de 6 años") discountPercentage = 0.1;
+        if (usage === "Vintage") discountPercentage = 0.25;
       }
 
       const newPrice = parseFloat(priceInput);
